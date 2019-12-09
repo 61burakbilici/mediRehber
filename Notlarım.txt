@@ -1,0 +1,12 @@
+git config --global user.name "61burakbilici"
+git config --global user.email burakbilici@hotmail.com.tr
+git clone https://github.com/61burakbilici/mediRehber.git
+
+
+git remote add origin  https://github.com/61burakbilici/mediRehber.git
+
+git remote add origin <Link to GitHub Repo>     //maps the remote repo link to local git repo
+
+git remote -v                                  //this is to verify the link to the remote repo 
+
+git push -u origin master     
