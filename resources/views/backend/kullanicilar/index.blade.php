@@ -1,53 +1,59 @@
-
 @extends('backend.layout')
 
 @section('title')
-    Tüm Kullanıcılar - MediRehber Admin Paneli | Burak BİLİCİ
+Kullanıcılar - MediRehber Admin Paneli | Burak BİLİCİ
 @endsection
 
 @section('content')
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-        <h1>
-            Anasayfa
-            <small>Optional description</small>
-        </h1>
-        <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
-            <li class="active">Here</li>
-        </ol>
-    </section>
+      <div class="box box-primary ">
 
-    <!-- Main content -->
-    <section class="content-header">
-
-        <div class="box box-primary">
-            <div class="box-header with-border">
-                <h3 class="box-title">Settings</h3>
-            </div>
-            <div class="box-body">
-              
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Açıklama</th>
-                        <th>İçerik</th>
-                        <th>Anahtar Değer</th>
-                        <th>Type</th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                   
-                    </thead>
-                </table>
-    
-                
-            </div>
+        <div class="box-header with-border">
+          <h3 class="box-title">Hastaneler</h3>
         </div>
+        <div class="class box-body">
+            <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Adı SoyAdı</th>
+                    <th scope="col">Kullanıcı Adı</th>
+                    <th scope="col">Hastane</th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+
+                <tbody id="sortable">
+
+                  @foreach ($data['user'] as $user)
+                    <tr>
+                    <th scope="row" class="sortable">{{$loop->iteration}}</th>
+                    <td >{{$user->name}}</td>
+                    <td>{{$user->username}}</td>
+                    <td>{{$user->email}}</td>
+                    <td style="width: 5px;"><a href="javascript:void(0)"><i class="fa fa-pencil-square"></i></a>  </td>
+                    <td style="width: 5px;"><a href="javascript:void(0)"><i class="fa fa-trash-o"></i></a>  </td>
+                  </tr>
+
+                  @endforeach
+
+                </tbody>
+              </table>
+        </div>  
+      </div>
     </section>
 
-    <!-- /.content -->
-</div>
+    
+
+  </div>    
+@endsection
+
+@section('css')
+    
+@endsection
+
+@section('js')
+    
 @endsection

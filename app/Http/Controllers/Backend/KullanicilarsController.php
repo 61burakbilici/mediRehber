@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Users;
 
 class KullanicilarsController extends Controller
 {
-    public function index(){
-        return view('backend.kullanicilar.index');
+    public function index()
+    {
+        $data['user'] = Users::all()->sortBy('id');
+        return view('backend.kullanicilar.index', compact('data'));
+        
     }
 }

@@ -1,7 +1,7 @@
 @extends('backend.layout')
 
 @section('title')
-Kullanıcılar - MediRehber Admin Paneli | Burak BİLİCİ
+Hastane Listesi - MediRehber Admin Paneli | Burak BİLİCİ
 @endsection
 
 @section('content')

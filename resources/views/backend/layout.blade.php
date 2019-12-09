@@ -220,19 +220,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <ul class="sidebar-menu" data-widget="tree">
                     <li class="header">Ana Menü</li>
                     <!-- Optionally, you can add icons to the links -->
-                    {{-- <li class="active"><a href="#"><i class="fa fa-link"></i> <span>Link</span></a></li>
-                    <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li> --}}
-                    <li class="treeview">
-                        <a href="#"><i class="fa fa-user-o"></i> <span>Kullanıcı Ayarları</span>
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="{{route('kullanicilar.Index')}}"><i class="fa fa-address-book-o "></i> Tüm Kullanıcılar</a></li>
-                            <li><a href="{{route('hastaneler.Index')}}"><i class="fa fa-hospital-o "></i> Hastaneler</a></li>
-                        </ul>
-                    </li>
+                    <li><a href="{{route('kullanicilar.Index')}}"><i class="fa fa-address-book-o "></i> Kullanıcılar</a></li>
+                    <li><a href="{{route('hastaneler.Index')}}"><i class="fa fa-hospital-o "></i> Hastaneler</a></li>
+                    
                     <li class="treeview">
                         <a href="#"><i class="fa fa-cog"></i> <span>Ayarlar</span>
                             <span class="pull-right-container">
