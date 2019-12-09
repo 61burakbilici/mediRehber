@@ -21,6 +21,6 @@ Route::get('/admin', function () {
 });
 
 
-Route::get('/admin/kullanicilar', function () {
-    return view('backend.kullanicilar.index');
-});
+Route::get('admin/hastaneler','Backend\HastanelersController@index')->name('hastaneler.Index');
+
+Route::get('admin/kullanicilar','Backend\KullanicilarsController@index')->name('kullanicilar.Index');

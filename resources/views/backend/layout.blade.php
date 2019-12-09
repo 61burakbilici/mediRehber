@@ -18,6 +18,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="/backend/bower_components/Ionicons/css/ionicons.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="/backend/dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="/backend/style.css">
+    <link rel="stylesheet" href="/backend/style.js">
     <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
         page. However, you can choose any other skin. Make sure you
         apply the skin class to the body tag so the changes take effect. -->
@@ -227,8 +229,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="#"><i class="fa fa-address-book-o "></i> Tüm Kullanıcılar</a></li>
-                            <li><a href="#"><i class="fa fa-hospital-o "></i> Hastaneler</a></li>
+                            <li><a href="{{route('kullanicilar.Index')}}"><i class="fa fa-address-book-o "></i> Tüm Kullanıcılar</a></li>
+                            <li><a href="{{route('hastaneler.Index')}}"><i class="fa fa-hospital-o "></i> Hastaneler</a></li>
                         </ul>
                     </li>
                     <li class="treeview">

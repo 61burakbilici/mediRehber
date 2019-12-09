@@ -20,13 +20,34 @@
     </section>
 
     <!-- Main content -->
-    <section class="content container-fluid">
+    <section class="content-header">
 
-        <!--------------------------
-| Your Page Content Here |
--------------------------->
-
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">Settings</h3>
+            </div>
+            <div class="box-body">
+              
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Açıklama</th>
+                        <th>İçerik</th>
+                        <th>Anahtar Değer</th>
+                        <th>Type</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                   
+                    </thead>
+                </table>
+    
+                
+            </div>
+        </div>
     </section>
+
     <!-- /.content -->
 </div>
 @endsection
