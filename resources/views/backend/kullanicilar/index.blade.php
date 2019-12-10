@@ -6,54 +6,103 @@ Kullanıcılar - MediRehber Admin Paneli | Burak BİLİCİ
 
 @section('content')
 <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <div class="box box-primary ">
 
-        <div class="box-header with-border">
-          <h3 class="box-title">Hastaneler</h3>
-        </div>
-        <div class="class box-body">
-            <table class="table table-striped">
-                <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Adı SoyAdı</th>
-                    <th scope="col">Kullanıcı Adı</th>
-                    <th scope="col">Hastane</th>
-                    <th scope="col"></th>
-                  </tr>
-                </thead>
 
-                <tbody id="sortable">
+    <!-- Main content -->
+    <section class="content container-fluid">
 
-                  @foreach ($data['user'] as $user)
-                    <tr>
-                    <th scope="row" class="sortable">{{$loop->iteration}}</th>
-                    <td >{{$user->name}}</td>
-                    <td>{{$user->username}}</td>
-                    <td>{{$user->email}}</td>
-                    <td style="width: 5px;"><a href="javascript:void(0)"><i class="fa fa-pencil-square"></i></a>  </td>
-                    <td style="width: 5px;"><a href="javascript:void(0)"><i class="fa fa-trash-o"></i></a>  </td>
-                  </tr>
+      
+        <div class="col-md-12">
+            <div class="box">
+              <div class="box-header with-border">
+                <h3 class="box-title">Kullanıcılar</h3>
+  
+                <div class="box-tools pull-right">
+                  <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                  </button>
+                  
+                </div>
+              </div>
+              <!-- /.box-header -->
+              <div class="box-body">
+                <div class="row">
+                    <div class="col-md-12">
 
-                  @endforeach
+                        <div class="box-body">
+                            <table id="example1" class="table table-bordered table-striped">
+                              <thead>
+                              <tr>
+                                <th>Rendering engine</th>
+                                <th>Browser</th>
+                                <th>Platform(s)</th>
+                                <th>Engine version</th>
+                                <th>CSS grade</th>
+                              </tr>
+                              </thead>
+                              <tbody>
+                              <tr>
+                                <td>Trident</td>
+                                <td>Internet
+                                  Explorer 4.0
+                                </td>
+                                <td>Win 95+</td>
+                                <td> 4</td>
+                                <td>X</td>
+                              </tr>
+                              
+                              </tbody>
+                            </table>
+                          </div>
+                    </div>
+                  
+                </div>
+                <!-- /.row -->
+              </div>
+             
+            </div>
+            <!-- /.box -->
+          </div>
+          <!-- /.col -->
 
-                </tbody>
-              </table>
-        </div>  
-      </div>
     </section>
-
-    
-
+    <!-- /.content -->
   </div>    
 @endsection
 
 @section('css')
     
+  <!-- DataTables -->
+ 
 @endsection
 
 @section('js')
-    
+<!-- jQuery 3 -->
+<script src="/backend/bower_components/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="/backend/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- DataTables -->
+<script src="/backend/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="/backend/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<!-- SlimScroll -->
+<script src="/backend/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<!-- FastClick -->
+<script src="/backend/bower_components/fastclick/lib/fastclick.js"></script>
+<!-- AdminLTE App -->
+<script src="/backend/dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="/backend/dist/js/demo.js"></script>
+<!-- page script -->
+<script>
+  $(function () {
+    $('#example1').DataTable()
+    $('#example2').DataTable({
+      'paging'      : true,
+      'lengthChange': false,
+      'searching'   : false,
+      'ordering'    : true,
+      'info'        : true,
+      'autoWidth'   : false
+    })
+  })
+</script>
 @endsection
