@@ -12,3 +12,4 @@ git remote -v                                  //this is to verify the link to t
 git push -u origin master     
 
 ---- 09.12.2019 Günü Kapattım
+---- 10.12.2019 Günü Kapattım

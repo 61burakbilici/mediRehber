@@ -54,8 +54,8 @@ Kullanıcılar - MediRehber Admin Paneli | Burak BİLİCİ
                                 <td>{{$hastane->hastane_adi}}</td>
                                 <td>{{$item->users_tel}}</td>
                                 <td>{{$item->users_email}}</td>
-                                <td style="width: 5px;"><a href="javascript:void(0)"><i class="fa fa-pencil-square"></i></a>  </td>
-                                <td style="width: 5px;"><a href="javascript:void(0)"><i class="fa fa-trash-o"></i></a>  </td>
+                                <td style="width: 5px;"><a href="{{{ route('kullanicilar.duzenle', ['id'=>$item->id]) }}}"><i class="fa fa-pencil-square"></i></a>  </td>
+                                <td style="width: 5px;"><a href="javascript:void(0)"><i id="{{$item->id}}" class="fa fa-trash-o"></i></a>  </td>
                               </tr>
                               @endforeach
                               </tbody>
@@ -75,6 +75,22 @@ Kullanıcılar - MediRehber Admin Paneli | Burak BİLİCİ
     </section>
     <!-- /.content -->
   </div>    
+  <script type="text/javascript">
+        $(".fa-trash-o").click(function () {
+            destroy_id = $(this).attr('id');
+
+            alertify.confirm('Silme işlemini onaylayın!', 'Bu işlem geri alınamaz',
+                function () {
+                    location.href = "/admin/kullanicilar/sil/" + destroy_id;
+                },
+                function () {
+                    alertify.error('Silme işlemi iptal edildi')
+                }
+            )
+
+        });
+
+  </script>
 @endsection
 
 @section('css')

@@ -18,3 +18,6 @@ Route::get('/', function () {
 Route::get('/admin','DefaultController@index')->name('mediRehber');
 Route::get('admin/hastaneler','Backend\HastanelersController@index')->name('hastaneler.Index');
 Route::get('admin/kullanicilar','Backend\KullanicilarsController@index')->name('kullanicilar.Index');
+
+Route::get('admin/kullanicilar/sil/{id}','Backend\KullanicilarsController@destroy')->name('kullanicilar.Destroy');
+Route::get('admin/kullanicilar/duzenle/{id}','Backend\KullanicilarsController@duzenle')->name('kullanicilar.duzenle');
