@@ -32,24 +32,32 @@ Kullanıcılar - MediRehber Admin Paneli | Burak BİLİCİ
                             <table id="example1" class="table table-bordered table-striped">
                               <thead>
                               <tr>
-                                <th>Rendering engine</th>
-                                <th>Browser</th>
-                                <th>Platform(s)</th>
-                                <th>Engine version</th>
-                                <th>CSS grade</th>
+                                <th>#</th>
+                                <th>Adı Soyadı</th>
+                                <th>Hastanesi</th>
+                                <th>Telefon</th>
+                                <th>Email</th>
+                                <th></th>
+                                <th></th>
                               </tr>
                               </thead>
                               <tbody>
+                                @foreach ($data['user'] as $item)   
+                                @php
+                                  $hastane_id =$item->id;
+                                    $hastane = DB::table('hastanelers')
+                                    ->where('id', $hastane_id)->first();
+                                @endphp
                               <tr>
-                                <td>Trident</td>
-                                <td>Internet
-                                  Explorer 4.0
-                                </td>
-                                <td>Win 95+</td>
-                                <td> 4</td>
-                                <td>X</td>
+                                <td>{{$loop->iteration}}</td>
+                                <td>{{$item->users_name}}</td>
+                                <td>{{$hastane->hastane_adi}}</td>
+                                <td>{{$item->users_tel}}</td>
+                                <td>{{$item->users_email}}</td>
+                                <td style="width: 5px;"><a href="javascript:void(0)"><i class="fa fa-pencil-square"></i></a>  </td>
+                                <td style="width: 5px;"><a href="javascript:void(0)"><i class="fa fa-trash-o"></i></a>  </td>
                               </tr>
-                              
+                              @endforeach
                               </tbody>
                             </table>
                           </div>

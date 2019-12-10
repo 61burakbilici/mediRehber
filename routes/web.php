@@ -15,12 +15,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
-Route::get('/admin', function () {
-    return view('backend.default.index');
-});
-
-
+Route::get('/admin','DefaultController@index')->name('mediRehber');
 Route::get('admin/hastaneler','Backend\HastanelersController@index')->name('hastaneler.Index');
-
 Route::get('admin/kullanicilar','Backend\KullanicilarsController@index')->name('kullanicilar.Index');
