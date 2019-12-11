@@ -11,7 +11,7 @@ class KullanicilarsController extends Controller
     {
         $data['user'] = Users::all()->sortBy('id');
         return view('backend.kullanicilar.index', compact('data'));
-        
+
     }
     public function destroy($id)
     {
@@ -21,7 +21,7 @@ class KullanicilarsController extends Controller
         }
 
         return back()->with('error', 'İşlem Başarısız');
-        
+
     }
     public function duzenle($id)
     {

@@ -20,7 +20,7 @@ class CreateHastanelersTable extends Migration
             $table->string('hastane_ilce');
             $table->string('hastane_adres');
             $table->string('hastane_tel');
-            $table->string('hastane_sira');
+            $table->string('hastane_sira')->nullable();
             $table->timestamps();
         });
     }

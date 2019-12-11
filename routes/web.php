@@ -21,3 +21,9 @@ Route::get('admin/kullanicilar','Backend\KullanicilarsController@index')->name('
 
 Route::get('admin/kullanicilar/sil/{id}','Backend\KullanicilarsController@destroy')->name('kullanicilar.Destroy');
 Route::get('admin/kullanicilar/duzenle/{id}','Backend\KullanicilarsController@duzenle')->name('kullanicilar.duzenle');
+//Route::get('admin/kullanicilar/update/{id}','Backend\KullanicilarsController@update')->name('kullanicilar.update');
+
+Route::get('admin/hastaneler/duzenle/{id}','Backend\HastanelersController@duzenle')->name('hastanelers.duzenle');
+Route::post('admin/hastaneler/update/{id}','Backend\HastanelersController@update')->name('hastanelers.update');
+Route::get('admin/hastaneler/sil/{id}','Backend\HastanelersController@destroy')->name('hastanelers.Destroy');
+
