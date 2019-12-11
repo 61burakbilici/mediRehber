@@ -7,9 +7,11 @@ git remote add origin  https://github.com/61burakbilici/mediRehber.git
 
 git remote add origin <Link to GitHub Repo>     //maps the remote repo link to local git repo
 
-git remote -v                                  //this is to verify the link to the remote repo 
+git remote -v                                  //this is to verify the link to the remote repo
 
-git push -u origin master     
+git push -u origin master
 
 ---- 09.12.2019 Günü Kapattım
 ---- 10.12.2019 Günü Kapattım
+
+Deneme
