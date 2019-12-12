@@ -23,8 +23,9 @@
                         <div class="row">
                             <div class="col-md-12">
 
+
                                 <div class="box-body">
-                                    <form action="" method="post" enctype="multipart/form-data">
+                                    <form action="{{route('kullanicilar.update',['id'=>$kullanici->id])}}" method="post" enctype="multipart/form-data">
                                         @csrf
                                         <div class="col-md-12">
 
@@ -34,6 +35,7 @@
                                                     <div class="row">
                                                         <div class="col-xs-12">
                                                             <input class="form-control" type="text"
+                                                                   name="users_name"
                                                                    value="{{$kullanici->users_name }}">
                                                         </div>
                                                     </div>
@@ -46,7 +48,8 @@
                                                     <div class="row">
                                                         <div class="col-xs-12">
                                                             <input class="form-control" type="text"
-                                                                   value="{{$kullanici->users_name }}">
+                                                                   name="users_username"
+                                                                   value="{{$kullanici->users_username }}">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -61,6 +64,7 @@
                                                     <div class="row">
                                                         <div class="col-xs-12">
                                                             <input class="form-control" type="text"
+                                                                   name="users_tel"
                                                                    value="{{$kullanici->users_tel }}">
                                                         </div>
                                                     </div>
@@ -72,8 +76,19 @@
                                                     <label>Hastane</label>
                                                     <div class="row">
                                                         <div class="col-xs-12">
-                                                            <input class="form-control" type="text"
-                                                                   value="{{$kullanici->hastane_id }}">
+                                                          @php($hastaneler = DB::table('hastanelers')
+                                                            ->get()
+                                                            )
+
+                                                            <select class="form-control" id="hastane_id">
+                                                            @foreach ($hastaneler as $hastaneler)
+
+                                                                    <option value="{{$hastaneler->id}}">{{$hastaneler->hastane_adi}}</option>
+
+
+                                                                @endforeach
+                                                            </select>
+
                                                         </div>
                                                     </div>
                                                 </div>
@@ -88,6 +103,7 @@
                                                     <div class="row">
                                                         <div class="col-xs-12">
                                                             <input class="form-control" type="email"
+                                                                   name="users_email"
                                                                    value="{{$kullanici->users_email }}">
                                                         </div>
                                                     </div>
@@ -100,6 +116,7 @@
                                                     <div class="row">
                                                         <div class="col-xs-12">
                                                             <input class="form-control" type="password"
+                                                                   name="users_password"
                                                                    value="{{$kullanici->users_password }}">
                                                         </div>
                                                     </div>

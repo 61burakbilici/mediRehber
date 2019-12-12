@@ -30,7 +30,15 @@ class HastanelersController extends Controller
     public function duzenle($id)
     {
         $hastanelers = Hastanelers::where('id', $id)->first();
-        return view('backend.hastaneler.duzenle')->with('hastanelers', $hastanelers);
+
+        if ($hastanelers){
+            return view('backend.hastaneler.duzenle')->with('hastanelers', $hastanelers);
+        }else{
+
+            //return view('backend.hastaneler.index');
+            return redirect('admin/hastaneler')->with('error', 'Yanlış Alandasın');
+        }
+
     }
 
     public function Update(Request $request, $id)

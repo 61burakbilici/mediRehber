@@ -255,7 +255,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- To the right -->
     <div class="pull-right hidden-xs">
         <a href="http://karisik.site">Burak Bilici</a>
-      
+
     </div>
     <!-- Default to the left -->
     <strong>Copyright &copy; @php
@@ -355,11 +355,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
      user experience. -->
      @if (session()->has('success'))
      <script>alertify.success('{{session('success')}}')</script>
-         
+
      @endif
      @if (session()->has('error'))
-     <script>alertify.success('{{session('error')}}')</script>
-         
+     <script>alertify.error('{{session('error')}}')</script>
+
      @endif
 </body>
 </html>

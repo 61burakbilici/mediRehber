@@ -45,14 +45,14 @@
                                         <tbody>
                                         @foreach ($data['user'] as $item)
                                             @php
-                                                $hastane_id =$item->id;
+
                                                   $hastane = DB::table('hastanelers')
-                                                  ->where('id', $hastane_id)->first();
+                                                  ->where('id', $item->hastane_id)->first();
                                             @endphp
                                             <tr>
                                                 <td>{{$loop->iteration}}</td>
                                                 <td>{{$item->users_name}}</td>
-                                                <td>{{$hastane->hastane_adi}}</td>
+                                                <td> {{$hastane->hastane_adi}}</td>
                                                 <td>{{$item->users_tel}}</td>
                                                 <td>{{$item->users_email}}</td>
                                                 <td style="width: 5px;"><a
