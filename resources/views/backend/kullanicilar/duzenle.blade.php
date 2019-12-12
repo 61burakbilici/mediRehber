@@ -25,7 +25,8 @@
 
 
                                 <div class="box-body">
-                                    <form action="{{route('kullanicilar.update',['id'=>$kullanici->id])}}" method="post" enctype="multipart/form-data">
+                                    <form action="{{route('kullanicilar.update',['id'=>$kullanici->id])}}" method="post"
+                                          enctype="multipart/form-data">
                                         @csrf
                                         <div class="col-md-12">
 
@@ -76,14 +77,14 @@
                                                     <label>Hastane</label>
                                                     <div class="row">
                                                         <div class="col-xs-12">
-                                                          @php($hastaneler = DB::table('hastanelers')
-                                                            ->get()
-                                                            )
+                                                            @php($hastaneler = DB::table('hastanelers')->get())
 
-                                                            <select class="form-control" id="hastane_id">
-                                                            @foreach ($hastaneler as $hastaneler)
+                                                            <select class="form-control" id="hastane_id"
+                                                                    name="hastane_id">
+                                                                @foreach ($hastaneler as $hastaneler)
 
-                                                                    <option value="{{$hastaneler->id}}">{{$hastaneler->hastane_adi}}</option>
+                                                                    <option
+                                                                        value="{{$hastaneler->id}}">{{$hastaneler->hastane_adi}}</option>
 
 
                                                                 @endforeach
@@ -122,13 +123,45 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Kullanıcı Resmi</label>
+                                                    <div class="row">
+                                                        <div class="col-xs-12">
+                                                            <input class="form-control" type="file"
+                                                                   name="users_foto"
+                                                                   value=""
+                                                                   required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Resim Var İse</label>
+                                                    <div class="row">
+                                                        <div class="col-xs-12">
+                                                            @if(empty($kullanici->users_foto))
+                                                                <img class="chat item online" src="/images/users/bay.png" style="width: 100px">
+                                                            @else
+                                                                <img class="chat item online" src="/images/users/{{$kullanici->users_foto}}" style="width: 100px">
+                                                            @endif
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <input type="hidden" value="user_res">
                                             <div class="box-footer">
                                                 <button style="width: 100%;" type="submit" class="btn btn-primary">
                                                     Kaydet
                                                 </button>
                                             </div>
-                                        </div>
 
+                                        </div>
                                     </form>
                                 </div>
                             </div>

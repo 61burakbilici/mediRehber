@@ -21,7 +21,6 @@ class HastanelersTableSeeder extends Seeder
                     'hastane_ilce' => $faker->city,
                     'hastane_adres' => $faker->address,
                     'hastane_tel' => $faker->phoneNumber,
-                    'hastane_sira' => $faker->randomDigit,
                     'created_at' => now(),
                     'updated_at' => now()
                 ]

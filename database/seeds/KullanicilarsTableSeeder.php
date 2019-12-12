@@ -12,7 +12,7 @@ class KullanicilarsTableSeeder extends Seeder
     public function run()
     {
         $faker = Faker\Factory::create('tr_TR');
-       
+
         for ($i = 0; $i < 10; $i++) {
             //$mail = $faker->email;
             DB::table('users')->insert(

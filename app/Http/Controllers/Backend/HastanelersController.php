@@ -49,8 +49,7 @@ class HastanelersController extends Controller
                 'hastane_il' => $request->hastane_il,
                 'hastane_ilce' => $request->hastane_ilce,
                 'hastane_adres' => $request->hastane_adres,
-                'hastane_tel' => $request->hastane_tel,
-                'hastane_sira' => $request->hastane_sira
+                'hastane_tel' => $request->hastane_tel
             ]
 
         );

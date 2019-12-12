@@ -48,9 +48,9 @@
                                                         <div class="col-xs-12">
                                                             <select name="hastane_il" id="hastane_il" class="form-control">
                                                                 @if(empty($hastanelers->hastane_adi))
-                                                                    <option value="">Seçin...</option>
+                                                                    <option value="{{$hastanelers->hastane_il}}">Seçin...</option>
                                                                     @elseif($hastanelers->hastane_adi)
-                                                                    <option value="{{$hastanelers->hastane_adi}}" selected>{{$hastanelers->hastane_il}}</option>
+                                                                    <option value="{{$hastanelers->hastane_il}}" selected>{{$hastanelers->hastane_il}}</option>
 
                                                                     @endif
                                                             </select>
@@ -67,9 +67,9 @@
                                                     <label>Hastane İlçesi</label>
                                                     <div class="row">
                                                         <div class="col-xs-12">
-                                                            <select name="hastane_ilce" id="hastane_ilce" class="form-control" disabled="disabled">
+                                                            <select name="hastane_ilce" id="hastane_ilce" class="form-control" >
                                                                 @if(empty($hastanelers->hastane_ilce))
-                                                                    <option value="">Seçin...</option>
+                                                                    <option value="{{$hastanelers->hastane_ilce}}">Seçin...</option>
                                                                 @elseif($hastanelers->hastane_ilce)
                                                                     <option value="{{$hastanelers->hastane_ilce}}" selected>{{$hastanelers->hastane_ilce}}</option>
 

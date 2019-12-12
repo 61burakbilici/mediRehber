@@ -35,17 +35,42 @@ class KullanicilarsController extends Controller
 
     public function Update(Request $request, $id)
     {
+        if ($request->hasFile('users_foto'))
+        {
+            $request->validate([
+                'users_foto' => 'required|image|mimes:jpg,jpeg,png|max:2048'
+            ]);
+
+            $file_name=uniqid().'.'.$request->users_foto->getClientOriginalExtension();
+            $request->users_foto->move(public_path('images/users'),$file_name);
+            $request->users_foto=$file_name;
+        }
+
+
         $kullanici = Users::Where('id', $id)->update(
             [
+                'users_foto' => $file_name,
                 'users_name' => $request->users_name,
                 'users_username' => $request->users_username,
                 'users_tel' => $request->users_tel,
                 'hastane_id' => $request->hastane_id,
                 'users_email' => $request->users_email,
-                'users_password' => bcrypt( $request->users_password)
+                'users_password' => bcrypt($request->users_password)
             ]
 
         );
-        return back()->with("success", "Düzenleme İşlemi Başarılı Şekilde Gerçekleştirilmiştir.");
+
+        if ($kullanici)
+        {
+            $path='images/users/'.$request->old_file;
+            if (file_exists($path))
+            {
+                @unlink(public_path($path));
+            }
+
+            return back()->with("success","Düzenleme İşlemi Başarılı Şekilde Gerçekleştirilmiştir.");
+        }
+        return back()->with("error","Düzenleme İşlemi Başarısız");
+
     }
 }

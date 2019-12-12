@@ -16,14 +16,19 @@ Route::get('/', function () {
 });
 
 Route::get('/admin','DefaultController@index')->name('mediRehber');
-Route::get('admin/hastaneler','Backend\HastanelersController@index')->name('hastaneler.Index');
-Route::get('admin/kullanicilar','Backend\KullanicilarsController@index')->name('kullanicilar.Index');
 
-Route::get('admin/kullanicilar/sil/{id}','Backend\KullanicilarsController@destroy')->name('kullanicilar.Destroy');
-Route::get('admin/kullanicilar/duzenle/{id}','Backend\KullanicilarsController@duzenle')->name('kullanicilar.duzenle');
-Route::post('admin/kullanicilar/update/{id}','Backend\KullanicilarsController@update')->name('kullanicilar.update');
 
-Route::get('admin/hastaneler/duzenle/{id}','Backend\HastanelersController@duzenle')->name('hastanelers.duzenle');
-Route::post('admin/hastaneler/update/{id}','Backend\HastanelersController@update')->name('hastanelers.update');
-Route::get('admin/hastaneler/sil/{id}','Backend\HastanelersController@destroy')->name('hastanelers.Destroy');
 
+Route::namespace('Backend')->group(function() {
+    Route::prefix('admin')->group(function(){
+        Route::get('kullanicilar','KullanicilarsController@index')->name('kullanicilar.Index');
+        Route::get('kullanicilar/sil/{id}','KullanicilarsController@destroy')->name('kullanicilar.Destroy');
+        Route::get('kullanicilar/duzenle/{id}','KullanicilarsController@duzenle')->name('kullanicilar.duzenle');
+        Route::post('kullanicilar/update/{id}','KullanicilarsController@update')->name('kullanicilar.update');
+
+        Route::get('hastaneler','HastanelersController@index')->name('hastaneler.Index');
+        Route::get('hastaneler/duzenle/{id}','HastanelersController@duzenle')->name('hastanelers.duzenle');
+        Route::post('hastaneler/update/{id}','HastanelersController@update')->name('hastanelers.update');
+        Route::get('hastaneler/sil/{id}','HastanelersController@destroy')->name('hastanelers.Destroy');
+    });
+});
