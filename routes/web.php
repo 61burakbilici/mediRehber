@@ -15,11 +15,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/admin','DefaultController@index')->name('mediRehber');
+//Route::get('/admin','DefaultController@index')->name('mediRehber');
 
 
 
 Route::namespace('Backend')->group(function() {
+
+    Route::prefix('admin')->group(function(){
+        Route::get('/','DefaultController@index')->name('mediRehber');
+        Route::get('/login','DefaultController@login')->name('admin.login');
+        Route::post('/login','DefaultController@authenticate')->name('admin.authenticate');
+    });
     Route::prefix('admin')->group(function(){
         Route::get('kullanicilar','KullanicilarsController@index')->name('kullanicilar.Index');
         Route::get('kullanicilar/ekle','KullanicilarsController@ekle')->name('kullanicilar.ekle');
