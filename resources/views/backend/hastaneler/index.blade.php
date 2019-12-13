@@ -12,7 +12,16 @@
 
                 <div class="box-header with-border">
                     <h3 class="box-title">Hastaneler</h3>
+
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                class="fa fa-minus"></i>
+                        </button>
+                        <a href="{{route('hastanelers.ekle')}}"> <button type="button" class="btn btn-success btn-xs"> Yeni Hastane Ekle</button></a>
+
+                    </div>
                 </div>
+
                 <div class="class box-body">
                     <table class="table table-striped">
                         <thead>

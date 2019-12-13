@@ -21,7 +21,7 @@
                             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
                                     class="fa fa-minus"></i>
                             </button>
-                            <button type="button" class="btn btn-success btn-xs"> Yeni Kullanıcı Ekle</button>
+                            <a href="{{route('kullanicilar.ekle')}}"> <button type="button" class="btn btn-success btn-xs"> Yeni Kullanıcı Ekle</button></a>
 
                         </div>
                     </div>
@@ -47,20 +47,28 @@
                                         @foreach ($data['user'] as $item)
                                             @php
 
-                                                  $hastane = DB::table('hastanelers')
-                                                  ->where('id', $item->hastane_id)->first();
+                                                $hastane = DB::table('hastanelers')
+                                                ->where('id', $item->hastane_id)->first();
                                             @endphp
                                             <tr>
                                                 <td>{{$loop->iteration}}</td>
                                                 <td>
                                                     @if(empty($item->users_foto))
-                                                        <img class="chat item online" src="/images/users/bay.png" style="width: 50px">
+                                                        <img class="chat item online" src="/images/users/bay.png"
+                                                             style="width: 50px">
                                                     @else
-                                                        <img class="chat item online" src="/images/users/{{$item->users_foto}}" style="width: 50px">
+                                                        <img class="chat item online"
+                                                             src="/images/users/{{$item->users_foto}}"
+                                                             style="width: 50px">
                                                     @endif
 
                                                     {{$item->users_name}}</td>
-                                                <td> {{$hastane->hastane_adi}}</td>
+                                                <td> @if(empty($hastane->hastane_adi))
+
+                                                    @else
+                                                        {{$hastane->hastane_adi}}
+                                                    @endif
+                                                </td>
                                                 <td>{{$item->users_tel}}</td>
                                                 <td>{{$item->users_email}}</td>
                                                 <td style="width: 5px;"><a

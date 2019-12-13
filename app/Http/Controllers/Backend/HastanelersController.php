@@ -16,6 +16,11 @@ class HastanelersController extends Controller
         return view('backend.hastaneler.index', compact('data'));
     }
 
+    public function ekle()
+    {
+        return view('backend.hastaneler.ekle');
+    }
+
     public function destroy($id)
     {
         $Hastanelers = Hastanelers::find($id);

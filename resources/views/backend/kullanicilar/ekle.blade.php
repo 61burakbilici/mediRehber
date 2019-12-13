@@ -25,7 +25,7 @@
 
 
                                 <div class="box-body">
-                                    <form action="{{route('kullanicilar.update',['id'=>$kullanici->id])}}" method="post"
+                                    <form action="" method="post"
                                           enctype="multipart/form-data">
                                         @csrf
                                         <div class="col-md-12">
@@ -37,7 +37,7 @@
                                                         <div class="col-xs-12">
                                                             <input class="form-control" type="text"
                                                                    name="users_name"
-                                                                   value="{{$kullanici->users_name }}">
+                                                                   value="">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -50,7 +50,7 @@
                                                         <div class="col-xs-12">
                                                             <input class="form-control" type="text"
                                                                    name="users_username"
-                                                                   value="{{$kullanici->users_username }}">
+                                                                   value="">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -66,7 +66,7 @@
                                                         <div class="col-xs-12">
                                                             <input class="form-control" type="text"
                                                                    name="users_tel"
-                                                                   value="{{$kullanici->users_tel}}">
+                                                                   value="">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -80,24 +80,11 @@
                                                             <select class="form-control" id="hastane_id"
                                                                     name="hastane_id">
                                                                 @php($hastaneler = DB::table('hastanelers')->get())
-                                                                @if(!empty($kullanici->hastane_id))
-                                                                    @php($hastane = DB::table('hastanelers')
-                                                                    ->where('id',$kullanici->hastane_id)->first())
-                                                                    <option value="{{$kullanici->hastane_id}}" selected>{{$hastane->hastane_adi}}</option>
+
                                                                     @foreach ($hastaneler as $hastaneler)
                                                                         <option value="{{$hastaneler->id}}">{{$hastaneler->hastane_adi}}</option>
                                                                     @endforeach
-                                                                @else
 
-
-
-                                                                    <option selected readonly="">Lütfen Kullanıcının
-                                                                        Hasatnesini Seçiniz
-                                                                    </option>
-                                                                    @foreach ($hastaneler as $hastaneler)
-                                                                        <option value="{{$hastaneler->id}}">{{$hastaneler->hastane_adi}}</option>
-                                                                    @endforeach
-                                                                @endif
                                                             </select>
 
                                                         </div>
@@ -115,7 +102,7 @@
                                                         <div class="col-xs-12">
                                                             <input class="form-control" type="email"
                                                                    name="users_email"
-                                                                   value="{{$kullanici->users_email }}">
+                                                                   value="">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -128,7 +115,7 @@
                                                         <div class="col-xs-12">
                                                             <input class="form-control" type="password"
                                                                    name="users_password"
-                                                                   value="{{$kullanici->users_password }}">
+                                                                   value="">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -140,12 +127,7 @@
                                                     <label>Kullanıcı Resmi</label>
                                                     <div class="row">
                                                         <div class="col-xs-12">
-                                                            <input class="form-control" type="file"
-                                                                   name="users_foto"
 
-                                                                   @if(!empty($kullanici->users_foto))
-                                                                   value="" required
-                                                                   @endif>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -156,14 +138,7 @@
                                                     <label>Resim Var İse</label>
                                                     <div class="row">
                                                         <div class="col-xs-12">
-                                                            @if(empty($kullanici->users_foto))
-                                                                <img class="chat item online"
-                                                                     src="/images/users/bay.png" style="width: 100px">
-                                                            @else
-                                                                <img class="chat item online"
-                                                                     src="/images/users/{{$kullanici->users_foto}}"
-                                                                     style="width: 100px">
-                                                            @endif
+
                                                         </div>
                                                     </div>
                                                 </div>

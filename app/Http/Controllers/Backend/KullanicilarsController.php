@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Users;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 
 class KullanicilarsController extends Controller
@@ -13,6 +14,12 @@ class KullanicilarsController extends Controller
     {
         $data['user'] = Users::all()->sortBy('id');
         return view('backend.kullanicilar.index', compact('data'));
+
+    }
+
+    public function ekle()
+    {
+       return view('backend.kullanicilar.ekle');
 
     }
 
@@ -35,18 +42,22 @@ class KullanicilarsController extends Controller
 
     public function Update(Request $request, $id)
     {
-        if ($request->hasFile('users_foto'))
-        {
-            $request->validate([
-                'users_foto' => 'required|image|mimes:jpg,jpeg,png|max:2048'
-            ]);
+        $user = DB::table('users')->where('id', $id)->first();
 
-            $file_name=uniqid().'.'.$request->users_foto->getClientOriginalExtension();
-            $request->users_foto->move(public_path('images/users'),$file_name);
-            $request->users_foto=$file_name;
+        if (empty($request->users_foto)) {
+            $file_name = $user->users_foto;
+        } else {
+            if ($request->hasFile('users_foto')) {
+                $request->validate([
+                    'users_foto' => 'required|image|mimes:jpg,jpeg,png|max:2048'
+                ]);
+
+                $file_name = uniqid() . '.' . $request->users_foto->getClientOriginalExtension();
+                $request->users_foto->move(public_path('images/users'), $file_name);
+                $request->users_foto = $file_name;
+            }
+
         }
-
-
         $kullanici = Users::Where('id', $id)->update(
             [
                 'users_foto' => $file_name,
@@ -59,18 +70,23 @@ class KullanicilarsController extends Controller
             ]
 
         );
+        if (!empty($request->users_foto)) {
+            if ($kullanici) {
+                $path = 'images/users/' . $user->users_foto;
+                if (file_exists($path)) {
+                    @unlink(public_path($path));
+                }
 
-        if ($kullanici)
-        {
-            $path='images/users/'.$request->old_file;
-            if (file_exists($path))
-            {
-                @unlink(public_path($path));
+                //return back()->with("success", "Düzenleme İşlemi Başarılı Şekilde Gerçekleştirilmiştir.");
             }
-
-            return back()->with("success","Düzenleme İşlemi Başarılı Şekilde Gerçekleştirilmiştir.");
         }
-        return back()->with("error","Düzenleme İşlemi Başarısız");
+        if ($kullanici) {
+
+            return back()->with("success", "Düzenleme İşlemi Başarılı Şekilde Gerçekleştirilmiştir.");
+        }else{
+            return back()->with("error", "Düzenleme İşlemi Başarısız");
+        }
+
 
     }
 }
