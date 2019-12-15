@@ -172,6 +172,30 @@
                                                 </div>
                                             </div>
 
+                                            <?php
+                                            $sonuc = explode(",", $kullanici->users_name);
+                                            echo "<pre>";
+                                            print_r($sonuc);
+                                            echo "</pre>";
+                                            echo "<br>";
+                                            echo count($sonuc);
+
+                                            ?>
+                                            @if($i=0;$i<count($sonuc);$i++)
+
+                                                <div id="myRepeatingFields">
+                                                    <div class="entry input-group col-xs-3">
+                                                        @foreach($sonuc as $sonuc)
+                                                            <input class="form-control" name="fields[]" type="text"
+                                                                   placeholder="Placeholder" value="{{$sonuc}}"/>
+                                                        @endforeach
+                                                        <span class="input-group-btn">
+									<button type="button" class="btn btn-success btn-lg btn-add">
+										<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+									</button>
+								</span>
+                                                    </div>
+                                                </div>
                                         </div>
 
                                         <input type="hidden" value="user_res">
@@ -185,6 +209,29 @@
                                 </form>
 
 
+                                <script
+                                    src="/backend/js/jquery-3.1.1.slim.min.js"
+                                    integrity="sha256-/SIrNqv8h6QGKDuNoLGA4iret+kyesCkHGzVUUV0shc="
+                                    crossorigin="anonymous"></script>
+                                <script>
+                                    $(function () {
+                                        $(document).on('click', '.btn-add', function (e) {
+                                            e.preventDefault();
+                                            var controlForm = $('#myRepeatingFields:first'),
+                                                currentEntry = $(this).parents('.entry:first'),
+                                                newEntry = $(currentEntry.clone()).appendTo(controlForm);
+                                            newEntry.find('input').val('');
+                                            controlForm.find('.entry:not(:last) .btn-add')
+                                                .removeClass('btn-add').addClass('btn-remove')
+                                                .removeClass('btn-success').addClass('btn-danger')
+                                                .html('<span class="glyphicon glyphicon-minus"></span>');
+                                        }).on('click', '.btn-remove', function (e) {
+                                            e.preventDefault();
+                                            $(this).parents('.entry:first').remove();
+                                            return false;
+                                        });
+                                    });
+                                </script>
                             </div>
                         </div>
 

@@ -19,7 +19,7 @@ class KullanicilarsController extends Controller
 
     public function ekle()
     {
-       return view('backend.kullanicilar.ekle');
+        return view('backend.kullanicilar.ekle');
 
     }
 
@@ -42,7 +42,7 @@ class KullanicilarsController extends Controller
 
     public function Update(Request $request, $id)
     {
-       $user = DB::table('users')->where('id', $id)->first();
+        $user = DB::table('users')->where('id', $id)->first();
 
         if (empty($request->users_foto)) {
             $file_name = $user->users_foto;
@@ -58,10 +58,15 @@ class KullanicilarsController extends Controller
             }
 
         }
+        $dizim=implode(",",$request->fields);
+        $silinsin=array(""," ");
+        $sonuc=array_diff($request->fields,$silinsin);
+        $dizim=implode(",",$sonuc);
+        //dd($dizim);
         $kullanici = Users::Where('id', $id)->update(
             [
                 'users_foto' => $file_name,
-                'users_name' => $request->users_name,
+                'users_name' => $dizim,
                 'users_username' => $request->users_username,
                 'users_tel' => $request->users_tel,
                 'hastane_id' => $request->hastane_id,
@@ -83,7 +88,7 @@ class KullanicilarsController extends Controller
         if ($kullanici) {
 
             return back()->with("success", "Düzenleme İşlemi Başarılı Şekilde Gerçekleştirilmiştir.");
-        }else{
+        } else {
             return back()->with("error", "Düzenleme İşlemi Başarısız");
         }
 

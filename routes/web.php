@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('backend.default.login');
 });
 
 //Route::get('/admin','DefaultController@index')->name('mediRehber');
@@ -39,4 +39,15 @@ Route::namespace('Backend')->group(function() {
         Route::post('hastaneler/update/{id}','HastanelersController@update')->name('hastanelers.update');
         Route::get('hastaneler/sil/{id}','HastanelersController@destroy')->name('hastanelers.Destroy');
     });
+});
+
+
+Route::namespace('Backend')->group(function () {
+    Route::prefix('admin')->group(function () {
+
+        Route::resource('rehber/hastane', 'HastanesController');
+        Route::resource('rehber/sirket', 'SirketsController');
+        Route::resource('rehber/firma', 'FirmasController');
+    });
+
 });

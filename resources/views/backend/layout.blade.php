@@ -20,6 +20,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="/backend/bower_components/Ionicons/css/ionicons.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="/backend/dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="/backend/css/style.css">
     <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
           page. However, you can choose any other skin. Make sure you
           apply the skin class to the body tag so the changes take effect. -->
@@ -229,21 +230,64 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <ul class="sidebar-menu" data-widget="tree">
                 <li class="header">Anamenü</li>
                 <!-- Optionally, you can add icons to the links -->
-                <li class="active"><a href="{{route('kullanicilar.Index')}}"><i class="fa fa-user-circle-o"></i> <span>Kullacılar</span></a>
-                </li>
-                <li><a href="{{route('hastaneler.Index')}}"><i class="fa fa-hospital-o"></i> <span>Hastaneler</span></a>
-                </li>
-                <li class="treeview">
-                    <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
+
+                <li class="treeview active ">
+                    <a href="#"><i class="fa fa-address-book-o "></i> <span>Rehber</span>
                         <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="#">Link in level 2</a></li>
-                        <li><a href="#">Link in level 2</a></li>
+
+                        <li class="">
+                            <a href="">
+                                <i class="fa fa-user-circle-o"></i>
+                                <span>Hastane</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="">
+                                <i class="fa fa-meetup"></i>
+                                <span>Şirket</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="">
+                                <i class="fa fa-hospital-o"></i>
+                                <span>Firmalar</span>
+                            </a>
+                        </li>
+
                     </ul>
                 </li>
+
+                <li class="treeview active">
+                    <a href="#"><i class="fa fa-user-secret "></i> <span>Admin</span>
+                        <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+                    </a>
+                    <ul class="treeview-menu">
+
+                        <li class="">
+                            <a href="{{route('kullanicilar.Index')}}">
+                                <i class="fa fa-user-circle-o"></i>
+                                <span>Kullacılar</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="{{route('hastaneler.Index')}}">
+                                <i class="fa fa-hospital-o"></i>
+                                <span>Hastaneler</span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+
             </ul>
             <!-- /.sidebar-menu -->
         </section>
@@ -345,14 +389,26 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <div class="control-sidebar-bg"></div>
 </div>
 <!-- ./wrapper -->
-
-
-<!-- jQuery 3 -->
 <script src="/backend/bower_components/jquery/dist/jquery.min.js"></script>
-<!-- Bootstrap 3.3.7 -->
 <script src="/backend/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<!-- AdminLTE App -->
+<script src="/backend/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="/backend/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <script src="/backend/dist/js/adminlte.min.js"></script>
+
+<!-- page script -->
+<script>
+    $(function () {
+        $('#example1').DataTable()
+        $('#example2').DataTable({
+            'paging': true,
+            'lengthChange': false,
+            'searching': false,
+            'ordering': true,
+            'info': true,
+            'autoWidth': false
+        })
+    })
+</script>
 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
@@ -370,5 +426,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         alertify.error('{{$error}}')
     </script>
 @endforeach
+@yield('css')
+@yield('js')
 </body>
 </html>
