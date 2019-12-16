@@ -43,10 +43,15 @@ Route::namespace('Backend')->group(function() {
 
 
 Route::namespace('Backend')->group(function () {
+
     Route::prefix('admin')->group(function () {
 
+        Route::post('/blog/sortable', 'HastanesController@sortable')->name('blog.Sortable');
+        Route::post('rehber/hastaneSil', 'HastanesController@destroy')->name('RehberHastane.destroy');
         Route::resource('rehber/hastane', 'HastanesController');
+
         Route::resource('rehber/sirket', 'SirketsController');
+
         Route::resource('rehber/firma', 'FirmasController');
     });
 

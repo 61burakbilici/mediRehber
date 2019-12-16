@@ -15,7 +15,8 @@ class FirmasController extends Controller
      */
     public function index()
     {
-        //
+        $data['Firmas'] =Firmas::all()->sortBy('adisoyadi');
+        return view('backend.rehber.firma', compact('data'));
     }
 
     /**
@@ -31,7 +32,7 @@ class FirmasController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -42,7 +43,7 @@ class FirmasController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Firmas  $firmas
+     * @param \App\Firmas $firmas
      * @return \Illuminate\Http\Response
      */
     public function show(Firmas $firmas)
@@ -53,7 +54,7 @@ class FirmasController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Firmas  $firmas
+     * @param \App\Firmas $firmas
      * @return \Illuminate\Http\Response
      */
     public function edit(Firmas $firmas)
@@ -64,8 +65,8 @@ class FirmasController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Firmas  $firmas
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Firmas $firmas
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Firmas $firmas)
@@ -76,7 +77,7 @@ class FirmasController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Firmas  $firmas
+     * @param \App\Firmas $firmas
      * @return \Illuminate\Http\Response
      */
     public function destroy(Firmas $firmas)

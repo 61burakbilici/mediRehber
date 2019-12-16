@@ -15,7 +15,8 @@ class SirketsController extends Controller
      */
     public function index()
     {
-        //
+        $data['Sirkets'] = Sirkets::all()->sortBy('adisoyadi');
+        return view('backend.rehber.sirket',compact('data'));
     }
 
     /**

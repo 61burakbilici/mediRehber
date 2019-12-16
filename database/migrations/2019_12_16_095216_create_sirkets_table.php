@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSirketTable extends Migration
+class CreateSirketsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateSirketTable extends Migration
      */
     public function up()
     {
-        Schema::create('sirket', function (Blueprint $table) {
+        Schema::create('sirkets', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
         });
@@ -26,6 +26,6 @@ class CreateSirketTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sirket');
+        Schema::dropIfExists('sirkets');
     }
 }

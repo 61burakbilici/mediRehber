@@ -240,21 +240,21 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <ul class="treeview-menu">
 
                         <li class="">
-                            <a href="">
+                            <a href="{{route('hastane.index')}}">
                                 <i class="fa fa-user-circle-o"></i>
                                 <span>Hastane</span>
                             </a>
                         </li>
 
                         <li>
-                            <a href="">
+                            <a href="{{route('sirket.index')}}">
                                 <i class="fa fa-meetup"></i>
                                 <span>Şirket</span>
                             </a>
                         </li>
 
                         <li>
-                            <a href="">
+                            <a href="{{route('firma.index')}}">
                                 <i class="fa fa-hospital-o"></i>
                                 <span>Firmalar</span>
                             </a>

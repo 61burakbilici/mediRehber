@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Backend;
 use App\Hastanes;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class HastanesController extends Controller
 {
@@ -54,12 +56,14 @@ class HastanesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Hastanes  $hastanes
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Hastanes $hastanes)
+    public function edit($id)
     {
-        //
+        $Hastanes=Hastanes::where('id',$id)->first();
+        return view('backend.rehber.duzenlehastane')->with('Hastanes',$Hastanes);
+
     }
 
     /**
@@ -80,8 +84,27 @@ class HastanesController extends Controller
      * @param  \App\Hastanes  $hastanes
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Hastanes $hastanes)
+    public function destroy($id)
     {
-        //
+        $Users = Users::find($id);
+        if ($Users->delete()) {
+            return back()->with('success', 'İşlem Başarılı');
+        }
+
+        return back()->with('error', 'İşlem Başarısız');
     }
+
+    public function sortable()
+    {
+//        print_r($_POST['item']);
+
+        foreach ($_POST['item'] as $key => $value) {
+            $blogs = Hastanes::find(intval($value));
+            $blogs->blog_must = intval($key);
+            $blogs->save();
+        }
+        echo true;
+    }
+
+
 }

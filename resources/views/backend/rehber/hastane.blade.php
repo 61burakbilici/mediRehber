@@ -1,6 +1,6 @@
 @extends('backend.layout')
 
-@section('title') Kullanıcı Düzenleme Sayfası- MediRehber Admin Paneli | Burak BİLİCİ @endsection
+@section('title') Hastane Rehberi Sayfası- MediRehber Admin Paneli | Burak BİLİCİ @endsection
 
 @section('content')
 
@@ -37,20 +37,20 @@
                                 <tbody>
                                 @foreach($data['hastane'] as $has)
                                 <tr>
-                                    <td>1</td>
+                                    <td>{{$loop->iteration}}</td>
                                     <td>{{$has->adisoyadi}}</td>
                                     <td>{{$has->dec}}</td>
                                     <td>{{$has->sabit}}</td>
                                     <td>{{$has->email}}</td>
                                     <td>{{$has->bolum}}</td>
                                     <td style="width: 5px;">
-                                        <a href="#">
+                                        <a href="{{route('hastane.edit',$has->id)}}">
                                             <i class="fa fa-pencil-square"></i>
                                         </a>
                                     </td>
                                     <td style="width: 5px;">
                                         <a href="javascript:void(0)">
-                                            <i id="" class="fa fa-trash-o"></i>
+                                            <i id="@php echo $has->id @endphp" class="fa fa-trash-o"></i>
                                         </a>
                                     </td>
                                 </tr>
@@ -68,5 +68,24 @@
         </section>
         <!-- /.content -->
     </div>
+    <!-- jQuery 3 -->
+    <script src="/backend/bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap 3.3.7 -->
+    <script type="text/javascript">
+        $(".fa-trash-o").click(function () {
+            destroy_id = $(this).attr('id');
+
+            alertify.confirm('Silme işlemini onaylayın!', 'Bu işlem geri alınamaz',
+                function () {
+                    location.href = "/admin/kullanicilar/sil/" + destroy_id;
+                },
+                function () {
+                    alertify.error('Silme işlemi iptal edildi')
+                }
+            )
+
+        });
+
+    </script>
 @endsection
 
