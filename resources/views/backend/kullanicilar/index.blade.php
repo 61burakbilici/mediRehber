@@ -101,7 +101,7 @@
 
             alertify.confirm('Silme işlemini onaylayın!', 'Bu işlem geri alınamaz',
                 function () {
-                    location.href = "{{route('RehberHastane.destroy')}}/" + destroy_id;
+                    location.href = "kullanicilar/sil/" + destroy_id;
                 },
                 function () {
                     alertify.error('Silme işlemi iptal edildi')

@@ -86,25 +86,15 @@ class HastanesController extends Controller
      */
     public function destroy($id)
     {
-        $Users = Users::find($id);
-        if ($Users->delete()) {
+        $hastane = Hastanes::find($id);
+        if ($hastane->delete()) {
             return back()->with('success', 'İşlem Başarılı');
         }
 
         return back()->with('error', 'İşlem Başarısız');
     }
 
-    public function sortable()
-    {
-//        print_r($_POST['item']);
 
-        foreach ($_POST['item'] as $key => $value) {
-            $blogs = Hastanes::find(intval($value));
-            $blogs->blog_must = intval($key);
-            $blogs->save();
-        }
-        echo true;
-    }
 
 
 }

@@ -77,7 +77,7 @@
 
             alertify.confirm('Silme işlemini onaylayın!', 'Bu işlem geri alınamaz',
                 function () {
-                    location.href = "/admin/kullanicilar/sil/" + destroy_id;
+                    location.href = "hastane/" + destroy_id;
                 },
                 function () {
                     alertify.error('Silme işlemi iptal edildi')
