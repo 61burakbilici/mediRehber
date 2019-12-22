@@ -61,6 +61,7 @@ class HastanesController extends Controller
      */
     public function edit($id)
     {
+
         $Hastanes=Hastanes::where('id',$id)->first();
         return view('backend.rehber.duzenlehastane')->with('Hastanes',$Hastanes);
 
@@ -86,7 +87,11 @@ class HastanesController extends Controller
      */
     public function destroy($id)
     {
+        echo $id;
+        die();
+
         $hastane = Hastanes::find($id);
+        dd($hastane);
         if ($hastane->delete()) {
             return back()->with('success', 'İşlem Başarılı');
         }

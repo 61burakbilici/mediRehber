@@ -47,7 +47,7 @@
     <div class="login-box-body">
         <p class="login-box-msg">Kullanıcı Adı ve Şifrenizi Kullanarak <br>Giriş Yapabilirsiniz</p>
 
-        <form action="{{route('admin.authenticate')}}" method="post">
+        <form action="{{route('mediRehber')}}" method="get">
             @csrf
             <div class="form-group has-feedback">
                 <input type="email" class="form-control" placeholder="Kullanıcı Adı" name="email">

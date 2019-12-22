@@ -49,13 +49,17 @@
                                         </a>
                                     </td>
                                     <td style="width: 5px;">
+                                        <form action="" method="post">
+                                            @csrf
+                                            <input type="hidden" name="_method" value="DELETE">
                                         <a href="javascript:void(0)">
                                             <i id="@php echo $has->id @endphp" class="fa fa-trash-o"></i>
                                         </a>
+                                        </form>
                                     </td>
                                 </tr>
                                 @endforeach
-                                </tfoot>
+                                </tbody>
                             </table>
                         </div>
                         <!-- /.box-body -->
@@ -72,12 +76,29 @@
     <script src="/backend/bower_components/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap 3.3.7 -->
     <script type="text/javascript">
+
+
         $(".fa-trash-o").click(function () {
+            $.ajaxSetup({
+                beforeSend: function(xhr, type) {
+                    if (!type.crossDomain) {
+                        xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+                    }
+                },
+            });
             destroy_id = $(this).attr('id');
 
             alertify.confirm('Silme işlemini onaylayın!', 'Bu işlem geri alınamaz',
                 function () {
-                    location.href = "hastane/" + destroy_id;
+
+                    $.ajax({
+                        url: './hastane/4',
+                        type: 'DELETE',  // user.destroy
+                        success: function(result) {
+                            // Do something with the result
+                        }
+                    });
+
                 },
                 function () {
                     alertify.error('Silme işlemi iptal edildi')
