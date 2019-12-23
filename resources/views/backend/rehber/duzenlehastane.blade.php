@@ -27,8 +27,9 @@
                             <div class="col-md-12">
 
                                 <div class="box-body">
-                                    <form action="" enctype="multipart/form-data" method="post">
+                                    <form action="{{route("hastane.update",$Hastanes->id)}}" enctype="multipart/form-data" method="post">
                                         @csrf
+                                        @method("PUT")
                                         <div class="col-md-12">
 
                                             <div class="col-md-4">
@@ -37,7 +38,7 @@
                                                     <div class="row">
                                                         <div class="col-xs-12">
                                                             <input class="form-control" type="text"
-                                                                   name="hastane_adi"
+                                                                   name="hastane_adisoyadi"
                                                                    value="{{$Hastanes->adisoyadi}}">
                                                         </div>
                                                     </div>
@@ -49,7 +50,7 @@
                                                     <div class="row">
                                                         <div class="col-xs-12">
                                                             <input class="form-control" type="text"
-                                                                   name="hastane_adi"
+                                                                   name="hastane_bolum"
                                                                    value="{{$Hastanes->bolum}}">
                                                         </div>
                                                     </div>
@@ -62,7 +63,7 @@
                                                     <div class="row">
                                                         <div class="col-xs-12">
                                                             <input class="form-control" type="text"
-                                                                   name="hastane_adi"
+                                                                   name="hastane_email"
                                                                    value="{{$Hastanes->email}}">
                                                         </div>
                                                     </div>
@@ -80,7 +81,7 @@
                                                     <div class="row">
                                                         <div class="col-xs-12">
                                                             <input class="form-control" type="text"
-                                                                   name="hastane_adi"
+                                                                   name="hastane_dec"
                                                                    value="{{$Hastanes->dec}}">
                                                         </div>
                                                     </div>
@@ -92,7 +93,7 @@
                                                     <div class="row">
                                                         <div class="col-xs-12">
                                                             <input class="form-control" type="text"
-                                                                   name="hastane_adi"
+                                                                   name="hastane_sabit"
                                                                    value="{{$Hastanes->sabit}}">
                                                         </div>
                                                     </div>
@@ -105,7 +106,7 @@
                                                     <div class="row">
                                                         <div class="col-xs-12">
                                                             <input class="form-control" type="text"
-                                                                   name="hastane_adi"
+                                                                   name="hastane_faks"
                                                                    value="{{$Hastanes->faks}}">
                                                         </div>
                                                     </div>
@@ -122,7 +123,7 @@
                                                     <label>Not </label>
                                                     <div class="row">
                                                         <div class="col-xs-12">
-                                                            <textarea class="form-control rounded-0" id="exampleFormControlTextarea1" rows="10">{{$Hastanes->not}}</textarea>
+                                                            <textarea name="hastane_not" class="form-control rounded-0" id="exampleFormControlTextarea1" rows="10">{{$Hastanes->not}}</textarea>
 
                                                         </div>
                                                     </div>
