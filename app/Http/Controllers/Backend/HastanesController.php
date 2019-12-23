@@ -87,16 +87,12 @@ class HastanesController extends Controller
      */
     public function destroy($id)
     {
-        echo $id;
-        die();
-
-        $hastane = Hastanes::find($id);
-        dd($hastane);
-        if ($hastane->delete()) {
-            return back()->with('success', 'İşlem Başarılı');
+        $has=Hastanes::find(intval($id));
+        if ($has->delete())
+        {
+            echo 1;
         }
-
-        return back()->with('error', 'İşlem Başarısız');
+        echo 0;
     }
 
 

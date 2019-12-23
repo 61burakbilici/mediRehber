@@ -36,7 +36,7 @@
                                 </thead>
                                 <tbody>
                                 @foreach($data['hastane'] as $has)
-                                <tr>
+                                <tr id="has-@php echo $has->id @endphp" >
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$has->adisoyadi}}</td>
                                     <td>{{$has->dec}}</td>
@@ -49,13 +49,8 @@
                                         </a>
                                     </td>
                                     <td style="width: 5px;">
-                                        <form action="" method="post">
-                                            @csrf
-                                            <input type="hidden" name="_method" value="DELETE">
-                                        <a href="javascript:void(0)">
-                                            <i id="@php echo $has->id @endphp" class="fa fa-trash-o"></i>
-                                        </a>
-                                        </form>
+                                        <a href="javascript:void(0)"><i id="@php echo $has->id @endphp"
+                                                                        class="fa fa-trash-o"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -78,13 +73,12 @@
     <script type="text/javascript">
 
 
+
         $(".fa-trash-o").click(function () {
             $.ajaxSetup({
-                beforeSend: function(xhr, type) {
-                    if (!type.crossDomain) {
-                        xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
-                    }
-                },
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
             });
             destroy_id = $(this).attr('id');
 
@@ -92,10 +86,17 @@
                 function () {
 
                     $.ajax({
-                        url: './hastane/4',
-                        type: 'DELETE',  // user.destroy
-                        success: function(result) {
-                            // Do something with the result
+                        type:"DELETE",
+                        url:"./hastane/"+destroy_id,
+                        success: function (msg) {
+                            if (msg)
+                            {
+                                $("#has-"+destroy_id).remove();
+                                alertify.success("Silme İşlemi Başarılı");
+
+                            } else {
+                                alertify.error("İşlem Tamamlanamadı");
+                            }
                         }
                     });
 
