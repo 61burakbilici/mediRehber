@@ -12,6 +12,10 @@
                 Hastane
                 <small>Medicana Çamlıca</small>
             </h1>
+            <ol class="breadcrumb">
+                <li><a href="{{route("hastane.create")}}"><small class="label pull-right bg-green"><i class="fa fa-plus"></i> Yeni Ekle</a></small></li>
+
+            </ol>
 
         </section>
 

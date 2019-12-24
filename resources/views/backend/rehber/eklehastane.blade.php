@@ -3,7 +3,13 @@
 
 @section('content')
     <div class="content-wrapper">
+        <section class="content-header">
+            <h1>
+                Yeni Rehber Ekleme
+                <small>Hastane</small>
+            </h1>
 
+        </section>
 
         <!-- Main content -->
         <section class="content container-fluid">
@@ -12,7 +18,7 @@
             <div class="col-md-12">
                 <div class="box">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Düzeneleme</h3>
+                        <h3 class="box-title">Yeni Rehber Ekleme</h3>
 
                         <div class="box-tools pull-right">
                             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
@@ -27,9 +33,9 @@
                             <div class="col-md-12">
 
                                 <div class="box-body">
-                                    <form action="{{route("hastane.update",$Hastanes->id)}}" enctype="multipart/form-data" method="post">
+                                    <form action="{{route("hastane.store")}}" enctype="multipart/form-data" method="post">
                                         @csrf
-                                        @method("PUT")
+
                                         <div class="col-md-12">
 
                                             <div class="col-md-4">
@@ -39,7 +45,7 @@
                                                         <div class="col-xs-12">
                                                             <input class="form-control" type="text"
                                                                    name="hastane_adisoyadi"
-                                                                   value="{{$Hastanes->adisoyadi}}">
+                                                                   placeholder="Adı Soyadı">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -51,7 +57,7 @@
                                                         <div class="col-xs-12">
                                                             <input class="form-control" type="text"
                                                                    name="hastane_bolum"
-                                                                   value="{{$Hastanes->bolum}}">
+                                                                   placeholder="Çalıştığı Bölüm">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -64,7 +70,7 @@
                                                         <div class="col-xs-12">
                                                             <input class="form-control" type="text"
                                                                    name="hastane_email"
-                                                                   value="{{$Hastanes->email}}">
+                                                                   placeholder="Eposta Adresi">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -82,7 +88,7 @@
                                                         <div class="col-xs-12">
                                                             <input class="form-control" type="text"
                                                                    name="hastane_dec"
-                                                                   value="{{$Hastanes->dec}}">
+                                                                   placeholder="Dec">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -94,7 +100,7 @@
                                                         <div class="col-xs-12">
                                                             <input class="form-control" type="text"
                                                                    name="hastane_sabit"
-                                                                   value="{{$Hastanes->sabit}}">
+                                                                   placeholder="Sabit">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -107,7 +113,7 @@
                                                         <div class="col-xs-12">
                                                             <input class="form-control" type="text"
                                                                    name="hastane_faks"
-                                                                   value="{{$Hastanes->faks}}">
+                                                                   placeholder="Faks">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -123,7 +129,7 @@
                                                     <label>Not </label>
                                                     <div class="row">
                                                         <div class="col-xs-12">
-                                                            <textarea name="hastane_not" class="form-control rounded-0" id="exampleFormControlTextarea1" rows="10">{{$Hastanes->not}}</textarea>
+                                                            <textarea name="hastane_not" class="form-control rounded-0" id="exampleFormControlTextarea1" rows="10" placeholder="Not"></textarea>
 
                                                         </div>
                                                     </div>
