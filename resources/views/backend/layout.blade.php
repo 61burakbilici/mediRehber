@@ -48,6 +48,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css"/>
     <!-- Bootstrap theme -->
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css"/>
+    @yield('ekstra')
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">

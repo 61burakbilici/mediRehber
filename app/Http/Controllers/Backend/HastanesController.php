@@ -76,10 +76,22 @@ class HastanesController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $dizim = implode(",", $request->decs);
+        $silinsin = array("", " ");
+        $sonuc = array_diff($request->decs, $silinsin);
+        $dizim = implode(",", $sonuc);
+
+        if ($dizim == "" || $dizim == 0) {
+            $dizim = null;
+        } else {
+
+            $dizim = implode(",", $sonuc);
+        }
+
         $hastane = Hastanes::Where('id', $id)->update(
             [
                 "adisoyadi" => $request->hastane_adisoyadi,
-                "dec" => $request->hastane_dec,
+                "dec" => $dizim,
                 "sabit" => $request->hastane_sabit,
                 "faks" => $request->hastane_faks,
                 "email" => $request->hastane_email,

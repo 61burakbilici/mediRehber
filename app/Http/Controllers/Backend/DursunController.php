@@ -59,6 +59,7 @@ class KullanicilarsController extends Controller
 
         }
         $dizim=implode(",",$request->fields);
+        //dd($dizim);
         $silinsin=array(""," ");
         $sonuc=array_diff($request->fields,$silinsin);
         $dizim=implode(",",$sonuc);
