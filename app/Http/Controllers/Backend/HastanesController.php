@@ -5,8 +5,6 @@ namespace App\Http\Controllers\Backend;
 use App\Hastanes;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 
 class HastanesController extends Controller
 {
@@ -76,23 +74,21 @@ class HastanesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $dizim = implode(",", $request->decs);
-        $silinsin = array("", " ");
-        $sonuc = array_diff($request->decs, $silinsin);
-        $dizim = implode(",", $sonuc);
-
-        if ($dizim == "" || $dizim == 0) {
+        if ($request->sabits['0'] == "") {
             $dizim = null;
         } else {
-
+            $dizim = implode(",", $request->sabits);
+            $silinsin = array("", " ");
+            $sonuc = array_diff($request->sabits, $silinsin);
             $dizim = implode(",", $sonuc);
+
         }
 
         $hastane = Hastanes::Where('id', $id)->update(
             [
                 "adisoyadi" => $request->hastane_adisoyadi,
-                "dec" => $dizim,
-                "sabit" => $request->hastane_sabit,
+                "dec" =>  $request->hastane_dec,
+                "sabit" => $dizim,
                 "faks" => $request->hastane_faks,
                 "email" => $request->hastane_email,
                 "bolum" => $request->hastane_bolum,

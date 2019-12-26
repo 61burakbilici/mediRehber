@@ -2,6 +2,39 @@
 @section('title') Hastane Rehberi Düzenleme Sayfası - MediRehber Admin Paneli | Burak BİLİCİ @endsection
 @section("ekstra")
 
+    <style>
+        .entry:not(:first-of-type) {
+            margin-top: 10px;
+        }
+
+        .glyphicon {
+            font-size: 12px;
+        }
+    </style>
+    <script
+        src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
+        integrity="sha256-/SIrNqv8h6QGKDuNoLGA4iret+kyesCkHGzVUUV0shc="
+        crossorigin="anonymous"></script>
+
+    <script>
+        $(function () {
+            $(document).on('click', '.btn-add', function (e) {
+                e.preventDefault();
+                var controlForm = $('#myRepeatingFields:first'),
+                    currentEntry = $(this).parents('.entry:first'),
+                    newEntry = $(currentEntry.clone()).appendTo(controlForm);
+                newEntry.find('input').val('');
+                controlForm.find('.entry:not(:last) .btn-add')
+                    .removeClass('btn-add').addClass('btn-remove')
+                    .removeClass('btn-success').addClass('btn-danger')
+                    .html('<span class="glyphicon glyphicon-minus"  style="top: -5px;"></span>');
+            }).on('click', '.btn-remove', function (e) {
+                e.preventDefault();
+                $(this).parents('.entry:first').remove();
+                return false;
+            });
+        });
+    </script>
 @endsection
 @section('content')
     <div class="content-wrapper">
@@ -81,88 +114,14 @@
                                                 <div class="form-group">
                                                     <label>Dec </label>
                                                     <div class="row">
+
                                                         <div class="col-xs-12">
-
-
-                                                            <style>
-                                                                .entry:not(:first-of-type) {
-                                                                    margin-top: 10px;
-                                                                }
-
-                                                                .glyphicon {
-                                                                    font-size: 12px;
-                                                                }
-                                                            </style>
-                                                            <script
-                                                                src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
-                                                                integrity="sha256-/SIrNqv8h6QGKDuNoLGA4iret+kyesCkHGzVUUV0shc="
-                                                                crossorigin="anonymous"></script>
-
-                                                            <script>
-                                                                $(function () {
-                                                                    $(document).on('click', '.btn-add', function (e) {
-                                                                        e.preventDefault();
-                                                                        var controlForm = $('#myRepeatingFields:first'),
-                                                                            currentEntry = $(this).parents('.entry:first'),
-                                                                            newEntry = $(currentEntry.clone()).appendTo(controlForm);
-                                                                        newEntry.find('input').val('');
-                                                                        controlForm.find('.entry:not(:last) .btn-add')
-                                                                            .removeClass('btn-add').addClass('btn-remove')
-                                                                            .removeClass('btn-success').addClass('btn-danger')
-                                                                            .html('<span class="glyphicon glyphicon-minus"  style="top: -5px;"></span>');
-                                                                    }).on('click', '.btn-remove', function (e) {
-                                                                        e.preventDefault();
-                                                                        $(this).parents('.entry:first').remove();
-                                                                        return false;
-                                                                    });
-                                                                });
-                                                            </script>
-
-                                                            <?php
-                                                            $sonuc = explode(",", $Hastanes->dec);
-
-                                                            $dec = count($sonuc);
-echo "<<<<<<<<<<<<<<<<<<<<".$Hastanes->dec;
-                                                            ?>
-
-
-                                                            <div id="myRepeatingFields">
-                                                                @if($sonuc =="" || !$sonuc ==null || $sonuc == " " || $sonuc == 0 )
-
-                                                                @else
-                                                                    @foreach($sonuc as $sonuc)
-                                                                        <div class="entry input-group">
-
-
-                                                                            <input class="form-control" name="decs[]"
-                                                                                   type="text" value="{{$sonuc}}"/>
-
-                                                                            <span class="input-group-btn">
-									<button type="button" class="btn btn-danger btn-lg btn-remove"
-                                            style="height: 34px;">
-										<span class="glyphicon glyphicon-minus" aria-hidden="true"
-                                              style="top: -5px;"></span>
-									</button>
-								</span>
-
-                                                                        </div>
-                                                                    @endforeach
-                                                                @endif
-                                                                <div class="entry input-group">
-                                                                    <input class="form-control" name="decs[]"
-                                                                           type="text" value=""/>
-                                                                    <span class="input-group-btn">
-									<button type="button" class="btn btn-success btn-lg btn-add" style="height: 34px;">
-										<span class="glyphicon glyphicon-plus" aria-hidden="true"
-                                              style="top: -5px;"></span>
-									</button>
-								</span>
-
-                                                                </div>
-                                                            </div>
-
+                                                            <input class="form-control" type="text"
+                                                                   name="hastane_dec"
+                                                                   value="{{$Hastanes->dec}}">
 
                                                         </div>
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -171,9 +130,61 @@ echo "<<<<<<<<<<<<<<<<<<<<".$Hastanes->dec;
                                                     <label>Sabit</label>
                                                     <div class="row">
                                                         <div class="col-xs-12">
-                                                            <input class="form-control" type="text"
-                                                                   name="hastane_sabit"
-                                                                   value="{{$Hastanes->sabit}}">
+
+
+                                                            <?php
+                                                            $sonuc = explode(",", $Hastanes->sabit);
+
+                                                            $dec = count($sonuc);
+
+                                                            ?>
+
+
+                                                            <div id="myRepeatingFields">
+                                                                @if($sonuc['0'] == "" )
+
+                                                                @else
+                                                                    @foreach($sonuc as $sonuc)
+                                                                        <div class="entry input-group">
+
+
+                                                                            <input class="form-control" name="sabits[]"
+                                                                                   type="text" value="{{$sonuc}}"/>
+
+                                                                            <span class="input-group-btn">
+                                                                                <button type="button"
+                                                                                        class="btn btn-danger btn-lg btn-remove"
+                                                                                        style="height: 34px;">
+                                                                                    <span
+                                                                                        class="glyphicon glyphicon-minus"
+                                                                                        aria-hidden="true"
+                                                                                        style="top: -5px;">
+
+                                                                                    </span>
+                                                                                </button>
+                                                                            </span>
+
+                                                                        </div>
+                                                                    @endforeach
+                                                                @endif
+                                                                <div class="entry input-group">
+                                                                    <input class="form-control" name="sabits[]"
+                                                                           type="text" value=""/>
+                                                                    <span class="input-group-btn">
+                                                                    <button type="button" class="btn btn-success btn-lg btn-add" style="height: 34px;">
+                                                                        <span class="glyphicon glyphicon-plus"
+                                                                              aria-hidden="true"
+                                                                              style="top: -5px;">
+
+                                                                                </span>
+                                                                            </button>
+                                                                        </span>
+
+                                                                </div>
+                                                            </div>
+
+
+
                                                         </div>
                                                     </div>
                                                 </div>
