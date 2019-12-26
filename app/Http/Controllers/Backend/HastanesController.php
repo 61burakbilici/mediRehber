@@ -26,7 +26,8 @@ class HastanesController extends Controller
      */
     public function create()
     {
-        //
+
+        return view("backend.rehber.eklehastane");
     }
 
     /**
@@ -37,7 +38,30 @@ class HastanesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if ($request->sabits['0'] == "") {
+            $dizim = null;
+        } else {
+            $dizim = implode(",", $request->sabits);
+            $silinsin = array("", " ");
+            $sonuc = array_diff($request->sabits, $silinsin);
+            $dizim = implode(",", $sonuc);
+
+        }
+        $hastane = Hastanes::insert(
+            [
+                "adisoyadi" => $request->hastane_adisoyadi,
+                "dec" =>  $request->hastane_dec,
+                "sabit" => $dizim,
+                "faks" => $request->hastane_faks,
+                "email" => $request->hastane_email,
+                "bolum" => $request->hastane_bolum,
+                "not" => $request->hastane_not,
+            ]
+        );
+        if ($hastane) {
+            return redirect(route('hastane.index'))->with('success','İşlem Başarılı');
+        }
+        return back()->with('error', 'İşlem Başarısız');
     }
 
     /**
