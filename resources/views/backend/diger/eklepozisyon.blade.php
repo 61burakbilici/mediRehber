@@ -1,0 +1,225 @@
+@extends('backend.layout')
+@section('title') Hastane Rehberi Düzenleme Sayfası - MediRehber Admin Paneli | Burak BİLİCİ @endsection
+@section("ekstra")
+
+    <style>
+        .entry:not(:first-of-type) {
+            margin-top: 10px;
+        }
+
+        .glyphicon {
+            font-size: 12px;
+        }
+    </style>
+    <script
+        src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
+        integrity="sha256-/SIrNqv8h6QGKDuNoLGA4iret+kyesCkHGzVUUV0shc="
+        crossorigin="anonymous"></script>
+
+    <script>
+        $(function () {
+            $(document).on('click', '.btn-add', function (e) {
+                e.preventDefault();
+                var controlForm = $('#myRepeatingFields:first'),
+                    currentEntry = $(this).parents('.entry:first'),
+                    newEntry = $(currentEntry.clone()).appendTo(controlForm);
+                newEntry.find('input').val('');
+                controlForm.find('.entry:not(:last) .btn-add')
+                    .removeClass('btn-add').addClass('btn-remove')
+                    .removeClass('btn-success').addClass('btn-danger')
+                    .html('<span class="glyphicon glyphicon-minus"  style="top: -5px;"></span>');
+            }).on('click', '.btn-remove', function (e) {
+                e.preventDefault();
+                $(this).parents('.entry:first').remove();
+                return false;
+            });
+        });
+    </script>
+@endsection
+@section('content')
+    <div class="content-wrapper">
+
+
+        <!-- Main content -->
+        <section class="content container-fluid">
+
+
+            <div class="col-md-12">
+                <div class="box">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Hastane İçi Yeni Rehber Ekleme</h3>
+
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                    class="fa fa-minus"></i>
+                            </button>
+
+                        </div>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-md-12">
+
+                                <div class="box-body">
+                                    <form action="{{route("hastane.store")}}"
+                                          enctype="multipart/form-data" method="post">
+                                        @csrf
+                                        <div class="col-md-12">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label>Adı Soyadı </label>
+                                                    <div class="row">
+                                                        <div class="col-xs-12">
+                                                            <input class="form-control" type="text"
+                                                                   name="hastane_adisoyadi"
+                                                                   >
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label>Çalıştığı Bölüm</label>
+                                                    <div class="row">
+                                                        <div class="col-xs-12">
+                                                            <input class="form-control" type="text"
+                                                                   name="hastane_bolum"
+                                                                   >
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label>Eposta Adresi</label>
+                                                    <div class="row">
+                                                        <div class="col-xs-12">
+                                                            <input class="form-control" type="text"
+                                                                   name="hastane_email"
+                                                                   >
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+
+                                        <div class="col-md-12">
+
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label>Dec </label>
+                                                    <div class="row">
+
+                                                        <div class="col-xs-12">
+                                                            <input class="form-control" type="text"
+                                                                   name="hastane_dec"
+                                                                   >
+
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label>Sabit</label>
+                                                    <div class="row">
+                                                        <div class="col-xs-12">
+
+                                                            <div id="myRepeatingFields">
+                                                                <div class="entry input-group">
+                                                                    <input class="form-control" name="sabits[]"
+                                                                           type="text" value=""/>
+                                                                    <span class="input-group-btn">
+                                                                    <button type="button" class="btn btn-success btn-lg btn-add" style="height: 34px;">
+                                                                        <span class="glyphicon glyphicon-plus"
+                                                                              aria-hidden="true"
+                                                                              style="top: -5px;">
+
+                                                                                </span>
+                                                                            </button>
+                                                                        </span>
+
+                                                                </div>
+                                                            </div>
+
+
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label>Faks</label>
+                                                    <div class="row">
+                                                        <div class="col-xs-12">
+                                                            <input class="form-control" type="text"
+                                                                   name="hastane_faks"
+                                                                  >
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+
+                                        <div class="col-md-12">
+
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label>Not </label>
+                                                    <div class="row">
+                                                        <div class="col-xs-12">
+                                                            <textarea name="hastane_not" class="form-control rounded-0"
+                                                                      id="exampleFormControlTextarea1"
+                                                                      rows="10"> </textarea>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+
+                                        <div class="col-md-12">
+
+
+                                            <div class="box-footer">
+                                                <button style="width: 100%;" type="submit" class="btn btn-primary">
+                                                    Kaydet
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- /.row -->
+                    </div>
+
+                </div>
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+
+        </section>
+        <!-- /.content -->
+    </div>
+
+@endsection
+
+@section('css')
+@endsection
+
+@section('js')
+@endsection

@@ -54,4 +54,11 @@ Route::namespace('Backend')->group(function () {
         Route::resource('/firma', 'FirmasController');
     });
 
+    Route::prefix('admin/diger')->group(function () {
+
+
+        Route::resource('/pozisyonlar', 'PozisyonlarsController');
+
+    });
+
 });

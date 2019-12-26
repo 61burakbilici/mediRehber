@@ -262,6 +262,27 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </a>
                         </li>
 
+                        <li class="treeview active ">
+                            <a href="#"><i class="fa fa-linode "></i> <span>Diğerleri</span>
+                                <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+                            </a>
+                            <ul class="treeview-menu">
+
+                                <li class="">
+                                    <a href="{{route("pozisyonlar.index")}}">
+                                        <i class="fa fa-clone"></i>
+                                        <span>Pozisyonlar</span>
+
+
+
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+
                     </ul>
                 </li>
 
