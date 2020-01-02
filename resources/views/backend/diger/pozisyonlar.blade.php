@@ -145,12 +145,12 @@
 
                 if($('#action').val() == 'Add')
                 {
-                    action_url = "{{ route('pozisyonlar.store') }}";
+                    action_url = "";
                 }
 
                 if($('#action').val() == 'Edit')
                 {
-                    action_url = "{{ route('pozisyonlar.update') }}";
+                    action_url = "";
                 }
 
                 $.ajax({
