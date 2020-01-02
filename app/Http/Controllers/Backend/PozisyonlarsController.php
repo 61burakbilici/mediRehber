@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Pozisyonlars;
+use DataTables;
+use Validator;
 use Illuminate\Http\Request;
 
 class PozisyonlarsController extends Controller
@@ -13,10 +15,23 @@ class PozisyonlarsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data['pozisyonlar'] = Pozisyonlars::all()->sortBy('pozisyon');
-        return view("backend.diger.pozisyonlar",compact("data"));
+        if($request->ajax())
+        {
+            $data = Pozisyonlars::latest()->get();
+            return DataTables::of($data)
+                ->addColumn('action', function($data){
+                    $button = '<button type="button" name="edit" id="'.$data->id.'" class="edit btn btn-primary btn-sm">Edit</button>';
+                    $button .= '&nbsp;&nbsp;&nbsp;<button type="button" name="edit" id="'.$data->id.'" class="delete btn btn-danger btn-sm">Delete</button>';
+                    return $button;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+
+
+        return view("backend.diger.pozisyonlar");
     }
 
     /**
@@ -37,8 +52,10 @@ class PozisyonlarsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+
     }
+
 
     /**
      * Display the specified resource.
@@ -59,8 +76,11 @@ class PozisyonlarsController extends Controller
      */
     public function edit($id)
     {
-        $data = Pozisyonlars::where('id', $id)->first();
-        return view("backend.diger.duzenlepozisyon")->with('poz',$data);
+        if(request()->ajax())
+        {
+            $data = Pozisyonlars::findOrFail($id);
+            return response()->json(['result' => $data]);
+        }
     }
 
     /**
@@ -70,9 +90,27 @@ class PozisyonlarsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Sample_data $sample_data)
     {
-        //
+        $rules = array(
+            'pozisyon'         =>  'required'
+        );
+
+        $error = Validator::make($request->all(), $rules);
+
+        if($error->fails())
+        {
+            return response()->json(['errors' => $error->errors()->all()]);
+        }
+
+        $form_data = array(
+            'pozisyon'     =>  $request->pozisyon
+        );
+
+        Pozisyonlars::whereId($request->hidden_id)->update($form_data);
+
+        return response()->json(['success' => 'Data is successfully updated']);
+
     }
 
     /**
@@ -83,6 +121,7 @@ class PozisyonlarsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = Pozisyonlars::findOrFail($id);
+        $data->delete();
     }
 }
