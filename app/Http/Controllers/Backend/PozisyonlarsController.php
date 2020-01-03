@@ -52,7 +52,24 @@ class PozisyonlarsController extends Controller
      */
     public function store(Request $request)
     {
+        $rules = array(
+            'pozisyon'    =>  'required'
+        );
 
+        $error = Validator::make($request->all(), $rules);
+
+        if($error->fails())
+        {
+            return response()->json(['errors' => $error->errors()->all()]);
+        }
+
+        $form_data = array(
+            'pozisyon'        =>  $request->pozisyon
+        );
+
+        Pozisyonlars::create($form_data);
+
+        return response()->json(['success' => 'Kayıt İşlemi Başarılı Bir Şekilde Tamamlandı']);
 
     }
 
