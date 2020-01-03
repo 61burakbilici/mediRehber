@@ -14,12 +14,12 @@
             </h1>
             <ol class="breadcrumb">
                 <li>
-
-                        <button class="btn btn-success btn-xs" name="create_record" id="create_record">
+                    <a href="">
+                        <button class="btn btn-success btn-xs">
                             <i class="fa fa-plus" aria-hidden="true"></i>
                             Yeni Ekle
                         </button>
-
+                    </a>
                 </li>
 
             </ol>
@@ -50,15 +50,16 @@
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                            <h4 class="modal-title">Yeni Kayıt</h4>
+                                            <h4 class="modal-title">Add New Record</h4>
                                         </div>
                                         <div class="modal-body">
                                             <span id="form_result"></span>
                                             <form method="post" id="sample_form" class="form-horizontal">
                                                 @csrf
                                                 <div class="form-group">
-                                                    <div class="col-md-12">
-                                                        <input type="text" name="pozisyon" id="pozisyon" class="form-control" placeholder="Bölüm Adı"/>
+                                                    <label class="control-label col-md-4" >First Name : </label>
+                                                    <div class="col-md-8">
+                                                        <input type="text" name="pozisyon" id="pozisyon" class="form-control" />
                                                     </div>
                                                 </div>
                                                 <div class="form-group" align="center">
@@ -130,7 +131,8 @@
             });
 
             $('#create_record').click(function(){
-                $('#action_button').val('Ekle');
+                $('.modal-title').text('Add New Record');
+                $('#action_button').val('Add');
                 $('#action').val('Add');
                 $('#form_result').html('');
 
@@ -139,18 +141,16 @@
 
             $('#sample_form').on('submit', function(event){
                 event.preventDefault();
-                var id = $(this).attr('id');
                 var action_url = '';
 
                 if($('#action').val() == 'Add')
                 {
-                    action_url = "";
+                    action_url = "{{ route('pozisyonlar.store') }}";
                 }
 
                 if($('#action').val() == 'Edit')
                 {
-
-                    action_url = "/admin/diger/pozisyonlar/"+id;
+                    action_url = "{{ route('pozisyonlar.update') }}";
                 }
 
                 $.ajax({
@@ -208,7 +208,7 @@
 
             $('#ok_button').click(function(){
                 $.ajax({
-                    url:"/admin/diger/pozisyonlar/destroy/"+user_id,
+                    url:"admin/diger/pozisyonlar/destroy/"+user_id,
                     beforeSend:function(){
                         $('#ok_button').text('Deleting...');
                     },
