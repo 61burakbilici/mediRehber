@@ -8,18 +8,22 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
+            @if (session()->has('success'))
+                {{session()->has('success')}}
+
+            @endif
             <h1>
                 Hastane
                 <small>Medicana Çamlıca</small>
             </h1>
             <ol class="breadcrumb">
                 <li>
-                    <a href="">
-                        <button class="btn btn-success btn-xs">
+
+                        <button class="btn btn-success btn-xs"  name="create_record" id="create_record">
                             <i class="fa fa-plus" aria-hidden="true"></i>
                             Yeni Ekle
                         </button>
-                    </a>
+
                 </li>
 
             </ol>
@@ -33,6 +37,7 @@
                     <div class="box">
                         <div class="box-body">
                             <div class="table-responsive">
+
                                 <table id="user_table" class="table table-bordered table-striped">
                                     <thead>
                                     <tr>
@@ -44,7 +49,32 @@
                             </div>
 
 
-                            <!-- /.modal -->
+                            <!-- Düzenleem/.modal -->
+                            <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="myModalLabel">Duzenleme Ekranı</h4>
+                                        </div>
+                                        <form action="{{route('pozisyonlar.update','test')}}" method="post">
+                                            {{method_field('patch')}}
+                                            {{csrf_field()}}
+                                            <div class="modal-body">
+                                                <input type="hidden" name="pozisyon_id" id="pozisyon_id" value="">
+                                                <input type="text" name="pozisyon" id="pozisyon"
+                                                       class="form-control"/>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Kaydetme</button>
+                                                <button type="submit" class="btn btn-primary">Kaydet</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Yeni Kayıt /.modal -->
                             <div id="formModal" class="modal fade" role="dialog">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
@@ -57,15 +87,16 @@
                                             <form method="post" id="sample_form" class="form-horizontal">
                                                 @csrf
                                                 <div class="form-group">
-                                                    <label class="control-label col-md-4" >First Name : </label>
-                                                    <div class="col-md-8">
-                                                        <input type="text" name="pozisyon" id="pozisyon" class="form-control" />
+                                                    <div class="col-md-12">
+                                                        <input type="text" name="pozisyon" id="pozisyon"
+                                                               class="form-control"/>
                                                     </div>
                                                 </div>
                                                 <div class="form-group" align="center">
-                                                    <input type="hidden" name="action" id="action" value="Add" />
-                                                    <input type="hidden" name="hidden_id" id="hidden_id" />
-                                                    <input type="submit" name="action_button" id="action_button" class="btn btn-warning" value="Add" />
+                                                    <input type="hidden" name="action" id="action" value="Add"/>
+                                                    <input type="hidden" name="hidden_id" id="hidden_id"/>
+                                                    <input type="submit" name="action_button" id="action_button"
+                                                           class="btn btn-warning" value="Add"/>
                                                 </div>
                                             </form>
                                         </div>
@@ -73,20 +104,29 @@
                                 </div>
                             </div>
 
-                            <div id="confirmModal" class="modal fade" role="dialog">
-                                <div class="modal-dialog">
+                            <!-- Silme /.modal -->
+                            <div class="modal modal-danger fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                            <h2 class="modal-title">Confirmation</h2>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title text-center" id="myModalLabel">Silme Ekranı</h4>
                                         </div>
-                                        <div class="modal-body">
-                                            <h4 align="center" style="margin:0;">Are you sure you want to remove this data?</h4>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" name="ok_button" id="ok_button" class="btn btn-danger">OK</button>
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                        </div>
+                                        <form action="{{route('pozisyonlar.destroy','test')}}" method="post">
+                                            {{method_field('delete')}}
+                                            {{csrf_field()}}
+                                            <div class="modal-body">
+                                                <p class="text-center">
+                                                    Bunu silmek istediğinizden emin misiniz?
+                                                </p>
+                                                <input type="hidden" name="pozisyon_id" id="pozisyon_id" value="">
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-success" data-dismiss="modal">Hayır, Silme</button>
+                                                <button type="submit" class="btn btn-warning">Evet, Sil</button>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -122,7 +162,8 @@
                     {
                         data: 'pozisyon',
                         name: 'pozisyon'
-                    },{
+                    },
+                    {
                         data: 'action',
                         name: 'action',
                         orderable: false
@@ -131,7 +172,7 @@
             });
 
             $('#create_record').click(function(){
-                $('.modal-title').text('Add New Record');
+                $('.modal-title').text('Yeni Kayıt Ekranı');
                 $('#action_button').val('Add');
                 $('#action').val('Add');
                 $('#form_result').html('');
@@ -145,14 +186,8 @@
 
                 if($('#action').val() == 'Add')
                 {
-                    action_url = "{{ route('pozisyonlar.store') }}";
+                    action_url = "{{route('pozisyonlar.store')}}";
                 }
-
-                if($('#action').val() == 'Edit')
-                {
-                    action_url = "{{ route('pozisyonlar.update') }}";
-                }
-
                 $.ajax({
                     url: action_url,
                     method:"POST",
@@ -180,48 +215,27 @@
                     }
                 });
             });
+            $('#edit').on('show.bs.modal', function (event) {
 
-            $(document).on('click', '.edit', function(){
-                var id = $(this).attr('id');
-                $('#form_result').html('');
-                $.ajax({
-                    url :"/admin/diger/pozisyonlar/"+id+"/edit",
-                    dataType:"json",
-                    success:function(data)
-                    {
-                        $('#pozisyon').val(data.result.pozisyon);
-                        $('#hidden_id').val(id);
-                        $('.modal-title').text('Edit Record');
-                        $('#action_button').val('Edit');
-                        $('#action').val('Edit');
-                        $('#formModal').modal('show');
-                    }
-                })
+                var button = $(event.relatedTarget)
+                var pozisyon = button.data('pozisyon')
+                var pozisyon_id = button.data('pozisyonid')
+                var modal = $(this)
+
+                modal.find('.modal-body #pozisyon').val(pozisyon);
+                modal.find('.modal-body #pozisyon_id').val(pozisyon_id);
             });
 
-            var user_id;
+            $('#delete').on('show.bs.modal', function (event) {
 
-            $(document).on('click', '.delete', function(){
-                user_id = $(this).attr('id');
-                $('#confirmModal').modal('show');
-            });
+                var button = $(event.relatedTarget)
 
-            $('#ok_button').click(function(){
-                $.ajax({
-                    url:"admin/diger/pozisyonlar/destroy/"+user_id,
-                    beforeSend:function(){
-                        $('#ok_button').text('Deleting...');
-                    },
-                    success:function(data)
-                    {
-                        setTimeout(function(){
-                            $('#confirmModal').modal('hide');
-                            $('#user_table').DataTable().ajax.reload();
-                            alert('Data Deleted');
-                        }, 2000);
-                    }
-                })
-            });
+                var cat_id = button.data('pozisyonid')
+                var modal = $(this)
+
+                modal.find('.modal-body #pozisyon_id').val(cat_id);
+            })
+
 
         });
     </script>
