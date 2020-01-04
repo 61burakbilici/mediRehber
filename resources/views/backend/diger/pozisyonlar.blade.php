@@ -1,6 +1,6 @@
 @extends('backend.layout')
 
-@section('title') Hastane Rehberi Sayfası- MediRehber Admin Paneli | Burak BİLİCİ @endsection
+@section('title') Bölümler - MediRehber Admin Paneli | Burak BİLİCİ @endsection
 
 @section('content')
 
@@ -8,12 +8,9 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            @if (session()->has('success'))
-                {{session()->has('success')}}
 
-            @endif
             <h1>
-                Hastane
+                Pozisyonlar
                 <small>Medicana Çamlıca</small>
             </h1>
             <ol class="breadcrumb">
@@ -41,8 +38,8 @@
                                 <table id="user_table" class="table table-bordered table-striped">
                                     <thead>
                                     <tr>
-                                        <th width="35%">First Name</th>
-                                        <th width="30%">Action</th>
+                                        <th width="35%">Bölüm Adı</th>
+                                        <th width="30%">İşlem</th>
                                     </tr>
                                     </thead>
                                 </table>
@@ -57,7 +54,7 @@
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                             <h4 class="modal-title" id="myModalLabel">Duzenleme Ekranı</h4>
                                         </div>
-                                        <form action="{{route('pozisyonlar.update','test')}}" method="post">
+                                        <form action="{{route('pozisyonlar.update','pozisyon_id')}}" method="post">
                                             {{method_field('patch')}}
                                             {{csrf_field()}}
                                             <div class="modal-body">
@@ -112,7 +109,7 @@
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                             <h4 class="modal-title text-center" id="myModalLabel">Silme Ekranı</h4>
                                         </div>
-                                        <form action="{{route('pozisyonlar.destroy','test')}}" method="post">
+                                        <form action="{{route('pozisyonlar.destroy','pozisyon_id')}}" method="post">
                                             {{method_field('delete')}}
                                             {{csrf_field()}}
                                             <div class="modal-body">
@@ -173,7 +170,7 @@
 
             $('#create_record').click(function(){
                 $('.modal-title').text('Yeni Kayıt Ekranı');
-                $('#action_button').val('Add');
+                $('#action_button').val('Ekle');
                 $('#action').val('Add');
                 $('#form_result').html('');
 
@@ -215,6 +212,7 @@
                     }
                 });
             });
+
             $('#edit').on('show.bs.modal', function (event) {
 
                 var button = $(event.relatedTarget)

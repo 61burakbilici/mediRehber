@@ -49,6 +49,7 @@
                                     <a href="{{{ route('hastanelers.duzenle', ['id'=>$hastanelers->id]) }}}">
                                         <i class="fa fa-pencil-square"></i>
                                     </a>
+                                    <a class="delete btn btn-danger btn-sm" data-pozisyonid=' . $data->id . ' data-toggle="modal" data-target="#delete">Sil</a>
                                 </td>
 
                                 <td style="width: 5px;">

@@ -103,7 +103,15 @@ class PozisyonlarsController extends Controller
      */
     public function update(Request $request)
     {
-        dd($request->all());
+        $pozisyon = Pozisyonlars::Where('id', $request->pozisyon_id)->update(
+            [
+                "pozisyon" => $request->pozisyon,
+            ]
+        );
+        if ($pozisyon) {
+            return back()->with('success', 'İşlem Başarılı');
+        }
+        return back()->with('error', 'İşlem Başarısız');
     }
 
     /**
@@ -116,13 +124,13 @@ class PozisyonlarsController extends Controller
     {
 
 
-        $category = Pozisyonlars::findOrFail($request->pozisyon_id);
-        $category->delete();
+        $pozisyon = Pozisyonlars::findOrFail($request->pozisyon_id);
+        $pozisyon->delete();
 
-        if ($category) {
-            return view('backend.diger.pozisyonlar')->with('success', 'İşlem Başarılı');
+        if ($pozisyon) {
+            return back()->with('success', 'İşlem Başarılı');
         }
-        return view('backend.diger.pozisyonlar')->with('error', 'İşlem Başarısız');
+        return back()->with('error', 'İşlem Başarısız');
 
 
 

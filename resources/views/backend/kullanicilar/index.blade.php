@@ -75,7 +75,7 @@
                                                         href="{{{ route('kullanicilar.duzenle', ['id'=>$item->id]) }}}"><i
                                                             class="fa fa-pencil-square"></i></a></td>
                                                 <td style="width: 5px;"><a href="javascript:void(0)"><i
-                                                            id="{{$item->id}}" class="fa fa-trash-o"></i></a></td>
+                                                            id="" class="fa fa-trash-o"></i></a></td>
                                             </tr>
                                         @endforeach
                                         </tbody>
