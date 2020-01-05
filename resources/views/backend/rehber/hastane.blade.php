@@ -46,13 +46,24 @@
                                 </thead>
                                 <tbody>
                                 @foreach($data['hastane'] as $has)
+
+                                    @php
+
+                                        $Pozisyonlar = DB::table('Pozisyonlars')
+                                        ->where('id', $has->bolum)->first();
+                                    @endphp
                                 <tr id="has-@php echo $has->id @endphp" >
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$has->adisoyadi}}</td>
                                     <td>{{$has->dec}}</td>
                                     <td>{{$has->sabit}}</td>
                                     <td>{{$has->email}}</td>
-                                    <td>{{$has->bolum}}</td>
+
+                                    <td> @if(empty($Pozisyonlar->pozisyon))
+                                        @else
+                                            {{$Pozisyonlar->pozisyon}}
+                                        @endif
+                                    </td>
                                     <td style="width: 5px;">
                                         <a href="{{route('hastane.edit',$has->id)}}">
                                             <i class="fa fa-pencil-square"></i>

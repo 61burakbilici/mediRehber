@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Hastanes;
 use App\Http\Controllers\Controller;
 use App\Pozisyonlars;
 use DataTables;
@@ -17,12 +18,18 @@ class PozisyonlarsController extends Controller
      */
     public function index(Request $request)
     {
+
         if ($request->ajax()) {
             $data = Pozisyonlars::latest()->get();
             return DataTables::of($data)
                 ->addColumn('action', function ($data) {
+                    $hastane = Hastanes::where('id', $data->id)->count();
                     $button = '<button class="edit btn btn-primary btn-sm" data-pozisyon="' . $data->pozisyon . '" data-pozisyonid=' . $data->id . ' data-toggle="modal" data-target="#edit">Düzenle</button>';
+                    if ($hastane <= 0){
                     $button .= '&nbsp;&nbsp;&nbsp; <button class="delete btn btn-danger btn-sm" data-pozisyonid=' . $data->id . ' data-toggle="modal" data-target="#delete">Sil</button>';
+                    }else{
+                        $button .=   $hastane;
+                    }
                     return $button;
                 })
                 ->rawColumns(['action'])

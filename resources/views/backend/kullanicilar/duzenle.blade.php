@@ -172,29 +172,7 @@
                                                 </div>
                                             </div>
 
-                                            <?php
-                                            $sonuc = explode(",", $kullanici->users_username);
-                                            echo "<pre>";
-                                            print_r($sonuc);
-                                            echo "</pre>";
-                                            echo "<br>";
-                                            echo count($sonuc);
 
-                                            ?>
-
-                                            <div id="myRepeatingFields">
-                                                <div class="entry input-group col-xs-3">
-                                                    @foreach($sonuc as $sonuc)
-                                                        <input class="form-control" name="fields[]" type="text"
-                                                               placeholder="Placeholder" value="{{$sonuc}}"/>
-                                                    @endforeach
-                                                    <span class="input-group-btn">
-									<button type="button" class="btn btn-success btn-lg btn-add">
-										<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-									</button>
-								</span>
-                                                </div>
-                                            </div>
                                         </div>
 
                                         <input type="hidden" value="user_res">

@@ -83,9 +83,18 @@
                                                     <label>Çalıştığı Bölüm</label>
                                                     <div class="row">
                                                         <div class="col-xs-12">
-                                                            <input class="form-control" type="text"
-                                                                   name="hastane_bolum"
-                                                                   >
+                                                            <select class="form-control select2" id="hastane_bolum"
+                                                                    name="hastane_bolum" style="width: 100%">
+                                                                @php($Pozisyonlar = DB::table('Pozisyonlars')->get())
+
+                                                                    <option selected readonly="">Lütfen Çalıştığı Bölümü Seçiniz
+                                                                    </option>
+                                                                    @foreach ($Pozisyonlar as $Pozisyonlars)
+                                                                        <option
+                                                                            value="{{$Pozisyonlars->id}}">{{$Pozisyonlars->pozisyon}}</option>
+                                                                    @endforeach
+
+                                                            </select>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -218,8 +227,18 @@
 
 @endsection
 
+
 @section('css')
+    <link rel="stylesheet" href="/backend/bower_components/select2/dist/css/select2.min.css">
 @endsection
 
 @section('js')
+    <script>
+        $(function () {
+            //Initialize Select2 Elements
+            $('.select2').select2()
+        })
+    </script>
+    <script src="/backend/bower_components/select2/dist/js/select2.full.min.js"></script>
+
 @endsection

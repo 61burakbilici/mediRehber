@@ -84,9 +84,31 @@
                                                     <label>Çalıştığı Bölüm</label>
                                                     <div class="row">
                                                         <div class="col-xs-12">
-                                                            <input class="form-control" type="text"
-                                                                   name="hastane_bolum"
-                                                                   value="{{$Hastanes->bolum}}">
+                                                            <select class="form-control select2" id="hastane_bolum"
+                                                                    name="hastane_bolum" style="width: 100%">
+                                                                @php($Pozisyonlar = DB::table('Pozisyonlars')->get())
+                                                                @if(!empty($Hastanes->bolum))
+                                                                    @php($Pozisyonlars = DB::table('Pozisyonlars')
+                                                                    ->where('id',$Hastanes->bolum)->first())
+                                                                    <option value="{{$Pozisyonlars->id}}"
+                                                                    selected disabled class="text-danger">{{$Pozisyonlars->pozisyon}}</option>
+
+                                                                    @foreach ($Pozisyonlar as $Pozisyonlars)
+                                                                        <option
+                                                                            value="{{$Pozisyonlars->id}}">{{$Pozisyonlars->pozisyon}}</option>
+                                                                    @endforeach
+                                                                    @else
+
+                                                                    <option selected readonly="">Lütfen Kullanıcının
+                                                                        Hasatnesini Seçiniz
+                                                                    </option>
+                                                                    @foreach ($Pozisyonlar as $Pozisyonlars)
+                                                                        <option
+                                                                            value="{{$Pozisyonlars->id}}">{{$Pozisyonlars->pozisyon}}</option>
+                                                                    @endforeach
+                                                                @endif
+                                                            </select>
+
                                                         </div>
                                                     </div>
                                                 </div>
@@ -171,7 +193,9 @@
                                                                     <input class="form-control" name="sabits[]"
                                                                            type="text" value=""/>
                                                                     <span class="input-group-btn">
-                                                                    <button type="button" class="btn btn-success btn-lg btn-add" style="height: 34px;">
+                                                                    <button type="button"
+                                                                            class="btn btn-success btn-lg btn-add"
+                                                                            style="height: 34px;">
                                                                         <span class="glyphicon glyphicon-plus"
                                                                               aria-hidden="true"
                                                                               style="top: -5px;">
@@ -182,7 +206,6 @@
 
                                                                 </div>
                                                             </div>
-
 
 
                                                         </div>
@@ -255,7 +278,17 @@
 @endsection
 
 @section('css')
+    <link rel="stylesheet" href="/backend/bower_components/select2/dist/css/select2.min.css">
 @endsection
 
 @section('js')
+    <script>
+        $(function () {
+            //Initialize Select2 Elements
+            $('.select2').select2()
+
+        })
+    </script>
+    <script src="/backend/bower_components/select2/dist/js/select2.full.min.js"></script>
+
 @endsection
