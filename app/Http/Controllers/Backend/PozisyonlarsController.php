@@ -28,7 +28,7 @@ class PozisyonlarsController extends Controller
                     if ($hastane <= 0){
                     $button .= '&nbsp;&nbsp;&nbsp; <button class="delete btn btn-danger btn-sm" data-pozisyonid=' . $data->id . ' data-toggle="modal" data-target="#delete">Sil</button>';
                     }else{
-                       // $button .=   $hastane;
+                        //$button .=   " ".$hastane ."Tane Personel Ekli Gözüküyor";
                     }
                     return $button;
                 })

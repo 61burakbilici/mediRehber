@@ -91,7 +91,7 @@
                                                                     @php($Pozisyonlars = DB::table('Pozisyonlars')
                                                                     ->where('id',$Hastanes->bolum)->first())
                                                                     <option value="{{$Pozisyonlars->id}}"
-                                                                    selected disabled class="text-danger">{{$Pozisyonlars->pozisyon}}</option>
+                                                                    selected class="text-danger">{{$Pozisyonlars->pozisyon}}</option>
 
                                                                     @foreach ($Pozisyonlar as $Pozisyonlars)
                                                                         <option
