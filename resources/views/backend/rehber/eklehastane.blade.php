@@ -73,26 +73,28 @@
                                                         <div class="col-xs-12">
                                                             <input class="form-control" type="text"
                                                                    name="hastane_adisoyadi"
-                                                                   >
+                                                            >
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
+
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label>Çalıştığı Bölüm</label>
+                                                    <label>Departmanı</label>
                                                     <div class="row">
                                                         <div class="col-xs-12">
                                                             <select class="form-control select2" id="hastane_bolum"
                                                                     name="hastane_bolum" style="width: 100%">
                                                                 @php($Pozisyonlar = DB::table('Pozisyonlars')->get())
 
-                                                                    <option selected readonly="">Lütfen Çalıştığı Bölümü Seçiniz
-                                                                    </option>
-                                                                    @foreach ($Pozisyonlar as $Pozisyonlars)
-                                                                        <option
-                                                                            value="{{$Pozisyonlars->id}}">{{$Pozisyonlars->pozisyon}}</option>
-                                                                    @endforeach
+                                                                <option selected readonly="">Lütfen Çalıştığı Bölümü
+                                                                    Seçiniz
+                                                                </option>
+                                                                @foreach ($Pozisyonlar as $Pozisyonlars)
+                                                                    <option
+                                                                        value="{{$Pozisyonlars->id}}">{{$Pozisyonlars->pozisyon}}</option>
+                                                                @endforeach
 
                                                             </select>
                                                         </div>
@@ -102,12 +104,22 @@
 
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label>Eposta Adresi</label>
+                                                    <label>Kategori</label>
                                                     <div class="row">
                                                         <div class="col-xs-12">
-                                                            <input class="form-control" type="text"
-                                                                   name="hastane_email"
-                                                                   >
+                                                            <select class="form-control select2" id="hastane_rehkat"
+                                                                    name="hastane_rehkat" style="width: 100%">
+                                                                @php($Rkategoris = DB::table('Rkategoris')->get())
+
+                                                                <option selected readonly="">Lütfen Çalıştığı Bölümü
+                                                                    Seçiniz
+                                                                </option>
+                                                                @foreach ($Rkategoris as $Rkategoris)
+                                                                    <option
+                                                                        value="{{$Rkategoris->id}}">{{$Rkategoris->rehkat_adi}}</option>
+                                                                @endforeach
+
+                                                            </select>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -118,33 +130,69 @@
 
                                         <div class="col-md-12">
 
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label>Dec </label>
-                                                    <div class="row">
 
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Eposta Adresi</label>
+                                                    <div class="row">
                                                         <div class="col-xs-12">
                                                             <input class="form-control" type="text"
-                                                                   name="hastane_dec"
-                                                                   >
-
+                                                                   name="hastane_email"
+                                                            >
                                                         </div>
-
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-4">
+
+                                            <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label>Sabit</label>
+                                                    <label>Faks</label>
                                                     <div class="row">
                                                         <div class="col-xs-12">
+                                                            <input class="form-control" type="text"
+                                                                   name="hastane_faks"
+                                                            >
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
 
-                                                            <div id="myRepeatingFields">
-                                                                <div class="entry input-group">
-                                                                    <input class="form-control" name="sabits[]"
-                                                                           type="text" value=""/>
-                                                                    <span class="input-group-btn">
-                                                                    <button type="button" class="btn btn-success btn-lg btn-add" style="height: 34px;">
+
+                                        </div>
+                                </div>
+
+                                <div class="col-md-12">
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Dec </label>
+                                            <div class="row">
+
+                                                <div class="col-xs-12">
+                                                    <input class="form-control" type="text"
+                                                           name="hastane_dec"
+                                                    >
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Sabit</label>
+                                            <div class="row">
+                                                <div class="col-xs-12">
+
+                                                    <div id="myRepeatingFields">
+                                                        <div class="entry input-group">
+                                                            <input class="form-control" name="sabits[]"
+                                                                   type="text" value=""/>
+                                                            <span class="input-group-btn">
+                                                                    <button type="button"
+                                                                            class="btn btn-success btn-lg btn-add"
+                                                                            style="height: 34px;">
                                                                         <span class="glyphicon glyphicon-plus"
                                                                               aria-hidden="true"
                                                                               style="top: -5px;">
@@ -153,76 +201,60 @@
                                                                             </button>
                                                                         </span>
 
-                                                                </div>
-                                                            </div>
-
-
-
                                                         </div>
                                                     </div>
+
+
                                                 </div>
                                             </div>
-
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label>Faks</label>
-                                                    <div class="row">
-                                                        <div class="col-xs-12">
-                                                            <input class="form-control" type="text"
-                                                                   name="hastane_faks"
-                                                                  >
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-
                                         </div>
+                                    </div>
 
-                                        <div class="col-md-12">
+                                </div>
+                                <div class="col-md-12">
 
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label>Not </label>
-                                                    <div class="row">
-                                                        <div class="col-xs-12">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Not </label>
+                                            <div class="row">
+                                                <div class="col-xs-12">
                                                             <textarea name="hastane_not" class="form-control rounded-0"
                                                                       id="exampleFormControlTextarea1"
                                                                       rows="10"> </textarea>
 
-                                                        </div>
-                                                    </div>
                                                 </div>
                                             </div>
-
-
                                         </div>
+                                    </div>
 
-                                        <div class="col-md-12">
 
-
-                                            <div class="box-footer">
-                                                <button style="width: 100%;" type="submit" class="btn btn-primary">
-                                                    Kaydet
-                                                </button>
-                                            </div>
-                                        </div>
-
-                                    </form>
                                 </div>
+
+                                <div class="col-md-12">
+
+
+                                    <div class="box-footer">
+                                        <button style="width: 100%;" type="submit" class="btn btn-primary">
+                                            Kaydet
+                                        </button>
+                                    </div>
+                                </div>
+
+                                </form>
                             </div>
-
                         </div>
-                        <!-- /.row -->
+
                     </div>
-
+                    <!-- /.row -->
                 </div>
-                <!-- /.box -->
-            </div>
-            <!-- /.col -->
 
-        </section>
-        <!-- /.content -->
+            </div>
+            <!-- /.box -->
+    </div>
+    <!-- /.col -->
+
+    </section>
+    <!-- /.content -->
     </div>
 
 @endsection

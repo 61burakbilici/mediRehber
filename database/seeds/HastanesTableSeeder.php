@@ -24,6 +24,7 @@ class HastanesTableSeeder extends Seeder
                     'faks' => $faker->phoneNumber,
                     'email' => $faker->email,
                     'bolum' => $faker->randomDigit,
+                    'rehkat' => $faker->randomDigit,
                     'not' => $faker->text($maxNbChars = 1000),
                     'ekleyen_id' => $faker->randomDigit,
                     'created_at' => now(),

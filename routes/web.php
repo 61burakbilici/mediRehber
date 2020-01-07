@@ -58,6 +58,7 @@ Route::namespace('Backend')->group(function () {
 
 
         Route::resource('/pozisyonlar', 'PozisyonlarsController');
+        Route::resource('/kategori', 'RkategorisController');
 
     });
 

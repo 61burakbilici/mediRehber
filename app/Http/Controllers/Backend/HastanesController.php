@@ -55,6 +55,7 @@ class HastanesController extends Controller
                 "faks" => $request->hastane_faks,
                 "email" => $request->hastane_email,
                 "bolum" => $request->hastane_bolum,
+                "rehkat" => $request->hastane_rehkat,
                 "not" => $request->hastane_not,
             ]
         );
@@ -116,6 +117,7 @@ class HastanesController extends Controller
                 "faks" => $request->hastane_faks,
                 "email" => $request->hastane_email,
                 "bolum" => $request->hastane_bolum,
+                "rehkat" => $request->hastane_rehkat,
                 "not" => $request->hastane_not,
             ]
         );

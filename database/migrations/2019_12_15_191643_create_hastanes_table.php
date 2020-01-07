@@ -21,6 +21,7 @@ class CreateHastanesTable extends Migration
             $table->text('faks')->nullable();
             $table->text('email')->nullable();
             $table->text('bolum')->nullable();
+            $table->text('rehkat')->nullable();
             $table->text('not')->nullable();
             $table->string('ekleyen_id')->nullable();
             $table->timestamps();

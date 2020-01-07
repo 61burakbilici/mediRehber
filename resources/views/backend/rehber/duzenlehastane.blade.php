@@ -81,23 +81,25 @@
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label>Çalıştığı Bölüm</label>
+                                                    <label>Departmanı</label>
                                                     <div class="row">
                                                         <div class="col-xs-12">
                                                             <select class="form-control select2" id="hastane_bolum"
-                                                                    name="hastane_bolum" style="width: 100%">
+                                                                    name="hastane_bolum" style="width: 100%" required>
                                                                 @php($Pozisyonlar = DB::table('Pozisyonlars')->get())
-                                                                @if(!empty($Hastanes->bolum))
+
+                                                                @if(empty($Hastanes->bolum))
                                                                     @php($Pozisyonlars = DB::table('Pozisyonlars')
                                                                     ->where('id',$Hastanes->bolum)->first())
                                                                     <option value="{{$Pozisyonlars->id}}"
-                                                                    selected class="text-danger">{{$Pozisyonlars->pozisyon}}</option>
+                                                                            selected
+                                                                            class="text-danger">{{$Pozisyonlars->pozisyon}}</option>
 
                                                                     @foreach ($Pozisyonlar as $Pozisyonlars)
                                                                         <option
                                                                             value="{{$Pozisyonlars->id}}">{{$Pozisyonlars->pozisyon}}</option>
                                                                     @endforeach
-                                                                    @else
+                                                                @else
 
                                                                     <option selected readonly="">Lütfen Kullanıcının
                                                                         Hasatnesini Seçiniz
@@ -113,8 +115,47 @@
                                                     </div>
                                                 </div>
                                             </div>
-
                                             <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label>Rehber Kategorisi</label>
+                                                    <div class="row">
+                                                        <div class="col-xs-12">
+                                                            <select class="form-control select2" id="hastane_rehkat"
+                                                                    name="hastane_rehkat" style="width: 100%">
+                                                                @php($Rkategori = DB::table('Rkategoris')->get())
+                                                                @if(!empty($Hastanes->rehkat))
+                                                                    @php($Rkategoris = DB::table('Rkategoris')
+                                                                    ->where('id',$Hastanes->rehkat)->first())
+                                                                    <option value="{{$Rkategoris->id}}"
+                                                                            selected
+                                                                            class="text-danger">{{$Rkategoris->rehkat_adi}}</option>
+
+                                                                    @foreach ($Rkategori as $Rkategoris)
+                                                                        <option
+                                                                            value="{{$Rkategoris->id}}">{{$Rkategoris->rehkat_adi}}</option>
+                                                                    @endforeach
+                                                                @else
+
+                                                                    <option selected readonly="">Lütfen Kategoriyi Seçiniz
+                                                                    </option>
+                                                                    @foreach ($Rkategori as $Rkategoris)
+                                                                        <option
+                                                                            value="{{$Rkategoris->id}}">{{$Rkategoris->rehkat_adi}}</option>
+                                                                    @endforeach
+                                                                @endif
+                                                            </select>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+
+                                        <div class="col-md-12">
+
+                                            <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Eposta Adresi</label>
                                                     <div class="row">
@@ -127,27 +168,24 @@
                                                 </div>
                                             </div>
 
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Faks</label>
+                                                    <div class="row">
+                                                        <div class="col-xs-12">
+                                                            <input class="form-control" type="text"
+                                                                   name="hastane_faks"
+                                                                   value="{{$Hastanes->faks}}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
 
                                         </div>
 
                                         <div class="col-md-12">
 
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label>Dec </label>
-                                                    <div class="row">
-
-                                                        <div class="col-xs-12">
-                                                            <input class="form-control" type="text"
-                                                                   name="hastane_dec"
-                                                                   value="{{$Hastanes->dec}}">
-
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
+                                            <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Sabit</label>
                                                     <div class="row">
@@ -213,19 +251,22 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-4">
+
+                                            <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label>Faks</label>
+                                                    <label>Dec </label>
                                                     <div class="row">
+
                                                         <div class="col-xs-12">
                                                             <input class="form-control" type="text"
-                                                                   name="hastane_faks"
-                                                                   value="{{$Hastanes->faks}}">
+                                                                   name="hastane_dec"
+                                                                   value="{{$Hastanes->dec}}">
+
                                                         </div>
+
                                                     </div>
                                                 </div>
                                             </div>
-
 
                                         </div>
 

@@ -35,8 +35,6 @@ class PozisyonlarsController extends Controller
                 ->rawColumns(['action'])
                 ->make(true);
         }
-
-
         return view("backend.diger.pozisyonlar");
     }
 

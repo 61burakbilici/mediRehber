@@ -275,9 +275,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <a href="{{route("pozisyonlar.index")}}">
                                         <i class="fa fa-clone"></i>
                                         <span>Pozisyonlar</span>
+                                    </a>
+                                </li>
 
-
-
+                                <li class="">
+                                    <a href="{{route('kategori.index')}}">
+                                        <i class="fa fa-microchip"></i>
+                                        <span>Kategoriler</span>
                                     </a>
                                 </li>
 

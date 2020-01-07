@@ -39,7 +39,8 @@
                                     <th>Dec</th>
                                     <th>Sabit</th>
                                     <th>Mail Adresi</th>
-                                    <th>Bölüm</th>
+                                    <th>Deparmanı</th>
+                                    <th>Kategori</th>
                                     <th></th>
                                     <th></th>
                                 </tr>
@@ -51,6 +52,9 @@
 
                                         $Pozisyonlar = DB::table('Pozisyonlars')
                                         ->where('id', $has->bolum)->first();
+
+                                        $Rkategoris = DB::table('Rkategoris')
+                                        ->where('id', $has->rehkat)->first();
                                     @endphp
                                 <tr id="has-@php echo $has->id @endphp" >
                                     <td>{{$loop->iteration}}</td>
@@ -62,6 +66,11 @@
                                     <td> @if(empty($Pozisyonlar->pozisyon))
                                         @else
                                             {{$Pozisyonlar->pozisyon}}
+                                        @endif
+                                    </td>
+                                    <td> @if(empty($Rkategoris->rehkat_adi))
+                                        @else
+                                            {{$Rkategoris->rehkat_adi}}
                                         @endif
                                     </td>
                                     <td style="width: 5px;">
