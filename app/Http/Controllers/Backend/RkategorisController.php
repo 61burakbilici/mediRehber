@@ -67,7 +67,8 @@ class RkategorisController extends Controller
         }
 
         $form_data = array(
-            'rehkat_adi' => $request->rehkat_adi
+            'rehkat_adi' => $request->rehkat_adi,
+            '"updated_at" => now(),' => now()
         );
 
         Rkategoris::create($form_data);

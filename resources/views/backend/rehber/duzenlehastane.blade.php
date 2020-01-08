@@ -84,26 +84,24 @@
                                                     <label>Departmanı</label>
                                                     <div class="row">
                                                         <div class="col-xs-12">
+                                                            @php($Pozisyonlar = DB::table('Pozisyonlars')->get())
                                                             <select class="form-control select2" id="hastane_bolum"
                                                                     name="hastane_bolum" style="width: 100%" required>
-                                                                @php($Pozisyonlar = DB::table('Pozisyonlars')->get())
-
                                                                 @if(empty($Hastanes->bolum))
+                                                                    <option selected readonly="">Lütfen Kullanıcının
+                                                                        Hasatnesini Seçiniz
+                                                                    </option>
+                                                                    @foreach ($Pozisyonlar as $Pozisyonlars)
+                                                                        <option
+                                                                            value="{{$Pozisyonlars->id}}">{{$Pozisyonlars->pozisyon}}</option>
+                                                                    @endforeach
+                                                                @else
                                                                     @php($Pozisyonlars = DB::table('Pozisyonlars')
                                                                     ->where('id',$Hastanes->bolum)->first())
                                                                     <option value="{{$Pozisyonlars->id}}"
                                                                             selected
                                                                             class="text-danger">{{$Pozisyonlars->pozisyon}}</option>
 
-                                                                    @foreach ($Pozisyonlar as $Pozisyonlars)
-                                                                        <option
-                                                                            value="{{$Pozisyonlars->id}}">{{$Pozisyonlars->pozisyon}}</option>
-                                                                    @endforeach
-                                                                @else
-
-                                                                    <option selected readonly="">Lütfen Kullanıcının
-                                                                        Hasatnesini Seçiniz
-                                                                    </option>
                                                                     @foreach ($Pozisyonlar as $Pozisyonlars)
                                                                         <option
                                                                             value="{{$Pozisyonlars->id}}">{{$Pozisyonlars->pozisyon}}</option>

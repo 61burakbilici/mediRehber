@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Hastanes;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use function Illuminate\Support\Facades\Date;
 
 class HastanesController extends Controller
 {
@@ -119,6 +120,7 @@ class HastanesController extends Controller
                 "bolum" => $request->hastane_bolum,
                 "rehkat" => $request->hastane_rehkat,
                 "not" => $request->hastane_not,
+                "updated_at" => now(),
             ]
         );
         if ($hastane) {
