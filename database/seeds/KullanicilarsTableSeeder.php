@@ -17,13 +17,13 @@ class KullanicilarsTableSeeder extends Seeder
             //$mail = $faker->email;
             DB::table('users')->insert(
                 [
-                    'users_name' => $faker->name,
-                    'users_username' => $faker->username,
-                    'users_email' => $faker->email,
+                    'name' => $faker->name,
+                    'email' => $faker->email,
                     'users_tel' => $faker->PhoneNumber,
                     'hastane_id' => $faker->randomDigit,
                     'email_verified_at' => now(),
-                    'users_password' => bcrypt('123456789'),
+                    'role' => 1,
+                    'password' => bcrypt('123456789'),
                     'created_at' => now(),
                     'updated_at' => now()
                 ]

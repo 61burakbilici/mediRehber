@@ -15,6 +15,16 @@ class Admin
      */
     public function handle($request, Closure $next)
     {
-        return $next($request);
+
+        if (!\Auth::guest() && \Auth::user()->role=='1')
+        {
+            return $next($request);
+
+        } else {
+            return redirect(route('admin.login'))->with('error','Erişim Yetkiniz Yok');
+        }
+
+        return redirect(route('admin.login'));
+
     }
 }

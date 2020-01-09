@@ -441,6 +441,7 @@ class ComposerStaticInit5269f43567df2a02636f625d068c9ce9
         'App\\Http\\Controllers\\Backend\\RkategorisController' => __DIR__ . '/../..' . '/app/Http/Controllers/Backend/RkategorisController.php',
         'App\\Http\\Controllers\\Backend\\SirketsController' => __DIR__ . '/../..' . '/app/Http/Controllers/Backend/SirketsController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Admin' => __DIR__ . '/../..' . '/app/Http/Middleware/Admin.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',

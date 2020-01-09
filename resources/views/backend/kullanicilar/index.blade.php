@@ -62,7 +62,7 @@
                                                              style="width: 50px">
                                                     @endif
 
-                                                    {{$item->users_name}}</td>
+                                                    {{$item->name}}</td>
                                                 <td> @if(empty($hastane->hastane_adi))
 
                                                     @else
@@ -70,7 +70,7 @@
                                                     @endif
                                                 </td>
                                                 <td>{{$item->users_tel}}</td>
-                                                <td>{{$item->users_email}}</td>
+                                                <td>{{$item->email}}</td>
                                                 <td style="width: 5px;"><a
                                                         href="{{{ route('kullanicilar.duzenle', ['id'=>$item->id]) }}}"><i
                                                             class="fa fa-pencil-square"></i></a></td>

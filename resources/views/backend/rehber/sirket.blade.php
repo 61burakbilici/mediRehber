@@ -26,8 +26,9 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Adı Soyadı</th>
-                                    <th>Dec</th>
-                                    <th>Sabit</th>
+                                    <th>Hastane Adı</th>
+                                    <th>Çalıştığı Birim / Bölüm</th>
+                                    <th>Dec / Sabit</th>
                                     <th>Mail Adresi</th>
                                     <th>Bölüm</th>
                                     <th></th>
@@ -38,8 +39,9 @@
                                 <tr>
                                     <td>1</td>
                                     <td>Burak Bilici</td>
-                                    <td>1560</td>
-                                    <td></td>
+                                    <td>Çamlıca Medicana</td>
+                                    <td>Bilgi Sistemleri Müdürlüğü /  Bilgi Sistemleri Uzmanı</td>
+                                    <td>1560 / 1453</td>
                                     <td>bbilici@medicana.com.tr</td>
                                     <td>Bilgi Sistemleri</td>
                                     <td style="width: 5px;">

@@ -26,6 +26,7 @@ return array(
     'App\\Http\\Controllers\\Backend\\RkategorisController' => $baseDir . '/app/Http/Controllers/Backend/RkategorisController.php',
     'App\\Http\\Controllers\\Backend\\SirketsController' => $baseDir . '/app/Http/Controllers/Backend/SirketsController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
+    'App\\Http\\Controllers\\HomeController' => $baseDir . '/app/Http/Controllers/HomeController.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
     'App\\Http\\Middleware\\Admin' => $baseDir . '/app/Http/Middleware/Admin.php',
     'App\\Http\\Middleware\\Authenticate' => $baseDir . '/app/Http/Middleware/Authenticate.php',

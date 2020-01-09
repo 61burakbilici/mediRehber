@@ -46,22 +46,30 @@
     <!-- /.login-logo -->
     <div class="login-box-body">
         <p class="login-box-msg">Kullanıcı Adı ve Şifrenizi Kullanarak <br>Giriş Yapabilirsiniz</p>
-
-        <form action="{{route('mediRehber')}}" method="get">
+        @if(Session::has('error'))
+            <div class="alert alert-danger">
+                {{session('error')}}
+            </div>
+        @elseif(Session::has('success'))
+            <div class="alert alert-success">
+                {{session('success')}}
+            </div>
+        @endif
+        <form action="{{route('admin.authenticate')}}" method="post">
             @csrf
             <div class="form-group has-feedback">
-                <input type="email" class="form-control" placeholder="Kullanıcı Adı" name="email">
+                <input type="email" class="form-control" placeholder="Kullanıcı Adı" name="email" value="{{old('email')}}" required>
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
-                <input type="password" class="form-control" placeholder="Şifre" name="password">
+                <input type="password" class="form-control" placeholder="Şifre" name="password" required>
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
             <div class="row">
                 <div class="col-xs-8">
                     <div class="checkbox icheck">
                         <label>
-                            <input name="rememberme" type="checkbox"> Beni Hatırla
+                            <input name="rememberme" type="checkbox" {{old('rememberme') ? 'checked' : ''}}> Beni Hatırla
                         </label>
                     </div>
                 </div>

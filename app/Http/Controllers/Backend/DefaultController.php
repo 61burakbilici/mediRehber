@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DefaultController extends Controller
 {
@@ -18,7 +19,18 @@ class DefaultController extends Controller
     }
 
     public function authenticate(Request $request){
-        dd($request->all());
+
+        $request->flash();
+
+        $credentials=$request->only('email','password');
+        $remember_me=$request->has('remember_me') ? true : false;
+
+        if (Auth::attempt($credentials,$remember_me))
+        {
+            return redirect()->intended(route('mediRehber'));
+        } else {
+            return back()->with('error','Hatalı Kullanıcı');
+        }
 
     }
 }

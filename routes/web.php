@@ -22,7 +22,7 @@ Route::get('/', function () {
 Route::namespace('Backend')->group(function() {
 
     Route::prefix('admin')->group(function(){
-        Route::get('/','DefaultController@index')->name('mediRehber');
+        Route::get('/','DefaultController@index')->name('mediRehber')->middleware('admin');
         Route::get('/login','DefaultController@login')->name('admin.login');
         Route::post('/login','DefaultController@authenticate')->name('admin.authenticate');
     });
@@ -43,23 +43,19 @@ Route::namespace('Backend')->group(function() {
 
 
 Route::namespace('Backend')->group(function () {
-
     Route::prefix('admin/rehber')->group(function () {
-
+        Route::middleware(['admin'])->group(function () {
 
         Route::resource('/hastane', 'HastanesController');
-
         Route::resource('/sirket', 'SirketsController');
-
-        Route::resource('/firma', 'FirmasController');
-    });
+        Route::resource('/firma', 'FirmasController');    });
 
     Route::prefix('admin/diger')->group(function () {
-
 
         Route::resource('/pozisyonlar', 'PozisyonlarsController');
         Route::resource('/kategori', 'RkategorisController');
 
+    });
     });
 
 });
