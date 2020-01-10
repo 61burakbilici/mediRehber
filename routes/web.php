@@ -24,6 +24,7 @@ Route::namespace('Backend')->group(function () {
         Route::get('/', 'DefaultController@index')->name('mediRehber')->middleware('admin');
         Route::get('/login', 'DefaultController@login')->name('admin.login');
         Route::post('/login', 'DefaultController@authenticate')->name('admin.authenticate');
+        Route::get('/logout', 'DefaultController@logout')->name('admin.logout');
     });
 
     Route::middleware(['admin'])->group(function () {

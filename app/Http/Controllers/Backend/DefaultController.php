@@ -18,6 +18,12 @@ class DefaultController extends Controller
         return view('backend.default.login');
     }
 
+    public function logout()
+    {
+        Auth::logout();
+        return redirect(route('admin.login'))->with('success','Güvenli Çıkış Yapıldı');
+    }
+
     public function authenticate(Request $request){
 
         $request->flash();

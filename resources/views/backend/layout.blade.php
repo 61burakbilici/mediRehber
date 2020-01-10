@@ -178,17 +178,36 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <!-- Menu Toggle Button -->
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <!-- The user image in the navbar-->
-                            <img src="/backend/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+                            @if(empty(Auth::user()->users_foto))
+                                <img src="/backend/dist/img/user2-160x160.jpg" class="user-image"
+                                     alt="{{Auth::user()->name}}">
+                            @else
+                                <img src="/images/users/{{Auth::user()->users_foto}}" class="user-image"
+                                     alt="{{Auth::user()->name}}">
+
+                            @endif
                             <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                            <span class="hidden-xs">Burak BİLİCİ</span>
+                            <span class="hidden-xs">{{Auth::user()->name}}</span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- The user image in the menu -->
                             <li class="user-header">
-                                <img src="/backend/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                                @if(empty(Auth::user()->users_foto))
+                                    <img src="/backend/dist/img/user2-160x160.jpg" class="img-circle"
+                                         alt="{{Auth::user()->name}}">
+                                @else
+                                    <img src="/images/users/{{Auth::user()->users_foto}}" class="img-circle"
+                                         alt="{{Auth::user()->name}}">
 
+                                @endif
                                 <p>
-                                    Burak Bilici - Bilgisayar Mühendisi
+                                    @php
+                                        $hastane_id = Auth::user()->hastane_id;
+if ()
+                                        $hastane = DB::table('Hastanelers')->where('id', $hastane_id)->first();
+
+                                    @endphp
+                                    {{Auth::user()->name}} - {!! Str::limit($hastane->hastane_adi, 10, ' ...') !!}
                                 </p>
                             </li>
                             <li class="user-footer">
@@ -196,7 +215,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <a href="#" class="btn btn-default btn-flat">Profil</a>
                                 </div>
                                 <div class="pull-right">
-                                    <a href="#" class="btn btn-default btn-flat">Çıkış Yap</a>
+                                    <a class="btn btn-default btn-flat" href="{{ route('admin.logout') }}">Çıkış Yap</a>
                                 </div>
                             </li>
                         </ul>
@@ -218,12 +237,25 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel">
                 <div class="pull-left image">
-                    <img src="/backend/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                    @if(empty(Auth::user()->users_foto))
+                        <img src="/backend/dist/img/user2-160x160.jpg" class="img-circle" alt="{{Auth::user()->name}}">
+                    @else
+                        <img src="/images/users/{{Auth::user()->users_foto}}" class="img-circle" alt="{{Auth::user()->name}}">
+
+                    @endif
+
                 </div>
                 <div class="pull-left info">
-                    <p>Burak Bilici</p>
+                    <p>{{Auth::user()->name}}</p>
                     <!-- Status -->
-                    <a href="#"><i class="fa fa-circle text-success"></i> Medicana Çamlıca</a>
+                    <a href="#"><i class="fa fa-circle text-success"></i>
+                        @php
+                            $hastane_id = Auth::user()->hastane_id;
+                            $hastane = DB::table('Hastanelers')->where('id', $hastane_id)->first();
+                            echo $hastane->hastane_adi;
+                        @endphp
+
+                    </a>
                 </div>
             </div>
 
