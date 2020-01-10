@@ -185,8 +185,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <img src="/images/users/{{Auth::user()->users_foto}}" class="user-image"
                                      alt="{{Auth::user()->name}}">
 
-                            @endif
-                            <!-- hidden-xs hides the username on small devices so only the image appears. -->
+                        @endif
+                        <!-- hidden-xs hides the username on small devices so only the image appears. -->
                             <span class="hidden-xs">{{Auth::user()->name}}</span>
                         </a>
                         <ul class="dropdown-menu">
@@ -203,11 +203,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <p>
                                     @php
                                         $hastane_id = Auth::user()->hastane_id;
-if ()
-                                        $hastane = DB::table('Hastanelers')->where('id', $hastane_id)->first();
+                                        if(empty($hastane_id)){
+
+                                        }else{
+                                         $hastane = DB::table('Hastanelers')->where('id', $hastane_id)->first();
+                                        }
+
 
                                     @endphp
-                                    {{Auth::user()->name}} - {!! Str::limit($hastane->hastane_adi, 10, ' ...') !!}
+                                    {{Auth::user()->name}} -@if(!empty($hastane_id)) {!! Str::limit($hastane->hastane_adi, 10, ' ...') !!}@endif
                                 </p>
                             </li>
                             <li class="user-footer">
@@ -240,7 +244,8 @@ if ()
                     @if(empty(Auth::user()->users_foto))
                         <img src="/backend/dist/img/user2-160x160.jpg" class="img-circle" alt="{{Auth::user()->name}}">
                     @else
-                        <img src="/images/users/{{Auth::user()->users_foto}}" class="img-circle" alt="{{Auth::user()->name}}">
+                        <img src="/images/users/{{Auth::user()->users_foto}}" class="img-circle"
+                             alt="{{Auth::user()->name}}">
 
                     @endif
 
@@ -250,9 +255,14 @@ if ()
                     <!-- Status -->
                     <a href="#"><i class="fa fa-circle text-success"></i>
                         @php
+
                             $hastane_id = Auth::user()->hastane_id;
+                            if (empty($hastane_id)){
+                                echo "Hastaneni Seçmelisin";
+                            }
+                            else{
                             $hastane = DB::table('Hastanelers')->where('id', $hastane_id)->first();
-                            echo $hastane->hastane_adi;
+                            echo $hastane->hastane_adi;}
                         @endphp
 
                     </a>
