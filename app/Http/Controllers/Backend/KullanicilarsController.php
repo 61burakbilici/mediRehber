@@ -61,11 +61,11 @@ class KullanicilarsController extends Controller
         $kullanici = Users::Where('id', $id)->update(
             [
                 'users_foto' => $file_name,
-                'users_name' => $request->users_name,
-                'users_username' => $request->users_username,
+                'mail' => $request->name,
+                'email' => $request->email,
                 'users_tel' => $request->users_tel,
                 'hastane_id' => $request->hastane_id,
-                'users_email' => $request->users_email,
+                'role' => $request->role,
                 'users_password' => bcrypt($request->users_password)
             ]
 

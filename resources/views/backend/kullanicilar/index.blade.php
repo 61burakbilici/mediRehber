@@ -21,7 +21,7 @@
                             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
                                     class="fa fa-minus"></i>
                             </button>
-                            <a href="{{route('kullanicilar.ekle')}}"> <button type="button" class="btn btn-success btn-xs"> Yeni Kullanıcı Ekle</button></a>
+                            <a href="{{route('kullanicilar.create')}}"> <button type="button" class="btn btn-success btn-xs"> Yeni Kullanıcı Ekle</button></a>
 
                         </div>
                     </div>
@@ -50,7 +50,7 @@
                                                 $hastane = DB::table('hastanelers')
                                                 ->where('id', $item->hastane_id)->first();
                                             @endphp
-                                            <tr>
+                                            <tr {{$item->role == 1 ? "style=background-color:#bfdc78": ""}}>
                                                 <td>{{$loop->iteration}}</td>
                                                 <td>
                                                     @if(empty($item->users_foto))
@@ -72,7 +72,7 @@
                                                 <td>{{$item->users_tel}}</td>
                                                 <td>{{$item->email}}</td>
                                                 <td style="width: 5px;"><a
-                                                        href="{{{ route('kullanicilar.duzenle', ['id'=>$item->id]) }}}"><i
+                                                        href="{{{ route('kullanicilar.edit', $item->id) }}}"><i
                                                             class="fa fa-pencil-square"></i></a></td>
                                                 <td style="width: 5px;"><a href="javascript:void(0)"><i
                                                             id="" class="fa fa-trash-o"></i></a></td>

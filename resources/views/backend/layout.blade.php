@@ -300,7 +300,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <ul class="treeview-menu">
 
                         <li class="">
-                            <a href="{{route('kullanicilar.Index')}}">
+                            <a href="{{route('kullanicilar.index')}}">
                                 <i class="fa fa-user-circle-o"></i>
                                 <span>Kullacılar</span>
                             </a>

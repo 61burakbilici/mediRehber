@@ -18,26 +18,23 @@ Route::get('/', function () {
 //Route::get('/admin','DefaultController@index')->name('mediRehber');
 
 
+Route::namespace('Backend')->group(function () {
 
-Route::namespace('Backend')->group(function() {
-
-    Route::prefix('admin')->group(function(){
-        Route::get('/','DefaultController@index')->name('mediRehber')->middleware('admin');
-        Route::get('/login','DefaultController@login')->name('admin.login');
-        Route::post('/login','DefaultController@authenticate')->name('admin.authenticate');
+    Route::prefix('admin')->group(function () {
+        Route::get('/', 'DefaultController@index')->name('mediRehber')->middleware('admin');
+        Route::get('/login', 'DefaultController@login')->name('admin.login');
+        Route::post('/login', 'DefaultController@authenticate')->name('admin.authenticate');
     });
-    Route::prefix('admin')->group(function(){
-        Route::get('kullanicilar','KullanicilarsController@index')->name('kullanicilar.Index');
-        Route::get('kullanicilar/ekle','KullanicilarsController@ekle')->name('kullanicilar.ekle');
-        Route::get('kullanicilar/sil/{id}','KullanicilarsController@destroy')->name('kullanicilar.Destroy');
-        Route::get('kullanicilar/duzenle/{id}','KullanicilarsController@duzenle')->name('kullanicilar.duzenle');
-        Route::post('kullanicilar/update/{id}','KullanicilarsController@update')->name('kullanicilar.update');
 
-        Route::get('hastaneler','HastanelersController@index')->name('hastaneler.Index');
-        Route::get('/hastaneler/ekle','HastanelersController@ekle')->name('hastanelers.ekle');
-        Route::get('hastaneler/duzenle/{id}','HastanelersController@duzenle')->name('hastanelers.duzenle');
-        Route::post('hastaneler/update/{id}','HastanelersController@update')->name('hastanelers.update');
-        Route::get('hastaneler/sil/{id}','HastanelersController@destroy')->name('hastanelers.Destroy');
+    Route::middleware(['admin'])->group(function () {
+        Route::prefix('admin')->group(function () {
+
+            Route::get('hastaneler', 'HastanelersController@index')->name('hastaneler.Index');
+            Route::get('/hastaneler/ekle', 'HastanelersController@ekle')->name('hastanelers.ekle');
+            Route::get('hastaneler/duzenle/{id}', 'HastanelersController@duzenle')->name('hastanelers.duzenle');
+            Route::post('hastaneler/update/{id}', 'HastanelersController@update')->name('hastanelers.update');
+            Route::get('hastaneler/sil/{id}', 'HastanelersController@destroy')->name('hastanelers.Destroy');
+        });
     });
 });
 
@@ -46,16 +43,19 @@ Route::namespace('Backend')->group(function () {
     Route::prefix('admin/rehber')->group(function () {
         Route::middleware(['admin'])->group(function () {
 
-        Route::resource('/hastane', 'HastanesController');
-        Route::resource('/sirket', 'SirketsController');
-        Route::resource('/firma', 'FirmasController');    });
+            Route::resource('/kullanicilar', 'UsersController');
+            Route::resource('/hastane', 'HastanesController');
+            Route::resource('/sirket', 'SirketsController');
+            Route::resource('/firma', 'FirmasController');
+        });
 
-    Route::prefix('admin/diger')->group(function () {
+        Route::prefix('admin/diger')->group(function () {
+            Route::middleware(['admin'])->group(function () {
+                Route::resource('/pozisyonlar', 'PozisyonlarsController');
+                Route::resource('/kategori', 'RkategorisController');
 
-        Route::resource('/pozisyonlar', 'PozisyonlarsController');
-        Route::resource('/kategori', 'RkategorisController');
-
-    });
+            });
+        });
     });
 
 });
