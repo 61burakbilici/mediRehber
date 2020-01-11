@@ -54,10 +54,10 @@
                                                 <td>{{$loop->iteration}}</td>
                                                 <td>
                                                     @if(empty($item->users_foto))
-                                                        <img class="chat item online" src="/images/users/bay.png"
+                                                        <img class="chat item online img-circle" src="/images/users/bay.png"
                                                              style="width: 50px">
                                                     @else
-                                                        <img class="chat item online"
+                                                        <img class="chat item online img-circle"
                                                              src="/images/users/{{$item->users_foto}}"
                                                              style="width: 50px">
                                                     @endif

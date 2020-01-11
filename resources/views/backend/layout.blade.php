@@ -211,7 +211,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
                                     @endphp
-                                    {{Auth::user()->name}} -@if(!empty($hastane_id)) {!! Str::limit($hastane->hastane_adi, 10, ' ...') !!}@endif
+                                    {{Auth::user()->name}}
+                                    -@if(!empty($hastane_id)) {!! Str::limit($hastane->hastane_adi, 10, ' ...') !!}@endif
                                 </p>
                             </li>
                             <li class="user-footer">
@@ -257,6 +258,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         @php
 
                             $hastane_id = Auth::user()->hastane_id;
+                            $role = Auth::user()->role;
                             if (empty($hastane_id)){
                                 echo "Hastaneni Seçmelisin";
                             }
@@ -333,31 +335,32 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </ul>
                 </li>
 
-                <li class="treeview active">
-                    <a href="#"><i class="fa fa-user-secret "></i> <span>Admin</span>
-                        <span class="pull-right-container">
+                @if($role== 1)
+                    <li class="treeview active">
+                        <a href="#"><i class="fa fa-user-secret "></i> <span>Admin</span>
+                            <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
-                    </a>
-                    <ul class="treeview-menu">
+                        </a>
+                        <ul class="treeview-menu">
 
-                        <li class="">
-                            <a href="{{route('kullanicilar.index')}}">
-                                <i class="fa fa-user-circle-o"></i>
-                                <span>Kullacılar</span>
-                            </a>
-                        </li>
+                            <li class="">
+                                <a href="{{route('kullanicilar.index')}}">
+                                    <i class="fa fa-user-circle-o"></i>
+                                    <span>Kullacılar</span>
+                                </a>
+                            </li>
 
-                        <li>
-                            <a href="{{route('hastaneler.Index')}}">
-                                <i class="fa fa-hospital-o"></i>
-                                <span>Hastaneler</span>
-                            </a>
-                        </li>
+                            <li>
+                                <a href="{{route('hastaneler.Index')}}">
+                                    <i class="fa fa-hospital-o"></i>
+                                    <span>Hastaneler</span>
+                                </a>
+                            </li>
 
-                    </ul>
-                </li>
-
+                        </ul>
+                    </li>
+                @endif
             </ul>
             <!-- /.sidebar-menu -->
         </section>

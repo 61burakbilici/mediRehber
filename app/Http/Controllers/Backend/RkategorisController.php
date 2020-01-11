@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Hastanes;
 use App\Rkategoris;
 use DataTables;
+use Illuminate\Support\Facades\Auth;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -18,18 +19,22 @@ class RkategorisController extends Controller
      */
     public function index(Request $request)
     {
+        $role = Auth::user()->role;
+        $kullanici_id = Auth::user()->id;
 
         if ($request->ajax()) {
             $data = Rkategoris::latest()->get();
             return DataTables::of($data)
                 ->addColumn('action', function($data){
                     $hastane = Hastanes::where('rehkat', $data->id )->count();
-                    $button = '<button type="button" name="edit" data-rehkat_id="'.$data->id.'" data-rehkat_adi="'.$data->rehkat_adi.'" class="edit btn btn-primary btn-sm" data-toggle="modal" data-target="#katduzenleme">Edit</button>';
+
+                    $button = '<button type="button" name="edit" data-rehkat_id="'.$data->id.'"  data-rehkat_adi="'.$data->rehkat_adi.'" class="edit btn btn-primary btn-sm" data-toggle="modal" data-target="#katduzenleme">Edit</button>';
                     if ($hastane <= 0){
                     $button .= '&nbsp;&nbsp;&nbsp;<button type="button" name="edit" data-rehkat_id="'.$data->id.'" class="delete btn btn-danger btn-sm" data-toggle="modal" data-target="#delete">Delete</button>';
                     }else{
                         //$button .=   " ".$hastane ."Tane Personel Ekli Gözüküyor";
                     }
+
                     return $button;
                 })
                 ->rawColumns(['action'])

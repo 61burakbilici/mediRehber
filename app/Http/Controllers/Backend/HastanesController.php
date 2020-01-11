@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Hastanes;
+use Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use function Illuminate\Support\Facades\Date;
@@ -16,7 +17,15 @@ class HastanesController extends Controller
      */
     public function index()
     {
+        $role = Auth::user()->role;
+        if ($role==1){
         $data['hastane'] = Hastanes::all()->sortBy('adisoyadi');
+        }else{
+            $ekleyen_id = Auth::user()->id;
+            $data['hastane'] = Hastanes::all()
+                ->where('ekleyen_id',$ekleyen_id)
+                ->sortBy('adisoyadi');
+        }
         return view('backend.rehber.hastane', compact('data'));
     }
 
