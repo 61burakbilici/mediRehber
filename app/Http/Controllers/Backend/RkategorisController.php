@@ -19,28 +19,36 @@ class RkategorisController extends Controller
      */
     public function index(Request $request)
     {
-        $role = Auth::user()->role;
+
+
         $kullanici_id = Auth::user()->id;
-
         if ($request->ajax()) {
-            $data = Rkategoris::latest()->get();
+            //$data = Rkategoris::where('ekleyen_id', $kullanici_id)->latest()->get();
+            $data = Rkategoris::orderByRaw(\DB::raw("FIELD(ekleyen_id, $kullanici_id) DESC"))->get();
             return DataTables::of($data)
-                ->addColumn('action', function($data){
-                    $hastane = Hastanes::where('rehkat', $data->id )->count();
+                ->addColumn('action', function ($data) {
+                    $hastane = Hastanes::where('rehkat', $data->id)->count();
 
-                    $button = '<button type="button" name="edit" data-rehkat_id="'.$data->id.'"  data-rehkat_adi="'.$data->rehkat_adi.'" class="edit btn btn-primary btn-sm" data-toggle="modal" data-target="#katduzenleme">Edit</button>';
-                    if ($hastane <= 0){
-                    $button .= '&nbsp;&nbsp;&nbsp;<button type="button" name="edit" data-rehkat_id="'.$data->id.'" class="delete btn btn-danger btn-sm" data-toggle="modal" data-target="#delete">Delete</button>';
-                    }else{
+                    $kullanici_id = Auth::user()->id;
+                    $role = Auth::user()->role;
+
+                    if ($data->ekleyen_id==$kullanici_id || $role==1){
+                        $button = '<button type="button" name="edit" data-rehkat_id="' . $data->id . '"  data-rehkat_adi="' . $data->rehkat_adi . '" class="edit btn btn-primary btn-sm" data-toggle="modal" data-target="#katduzenleme">Edit</button>';
+                    if ($hastane <= 0) {
+                        $button .= '&nbsp;&nbsp;&nbsp;<button type="button" name="edit" data-rehkat_id="' . $data->id . '" class="delete btn btn-danger btn-sm" data-toggle="modal" data-target="#delete">Delete</button>';
+                    } else {
                         //$button .=   " ".$hastane ."Tane Personel Ekli Gözüküyor";
                     }
-
+                    }else{
+                        $button ='<p class="text-red">Sadece Yetkilisi Müdahale Edebilir</p>';
+                        $button .='';
+                    }
                     return $button;
                 })
                 ->rawColumns(['action'])
                 ->make(true);
         }
-      return view("backend.diger.rehkategori");
+        return view("backend.diger.rehkategori");
     }
 
     /**
@@ -56,11 +64,13 @@ class RkategorisController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
+
+        $ekleyen_id = Auth::user()->id;
         $rules = array(
             'rehkat_adi' => 'required'
         );
@@ -70,10 +80,9 @@ class RkategorisController extends Controller
         if ($error->fails()) {
             return back()->with('error', 'Lütfen Zorunlu Alanları Doldurunuz. Kayıt Yapılamadı');
         }
-
         $form_data = array(
             'rehkat_adi' => $request->rehkat_adi,
-            '"updated_at" => now(),' => now()
+            'ekleyen_id' => $ekleyen_id
         );
 
         Rkategoris::create($form_data);
@@ -84,7 +93,7 @@ class RkategorisController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Rkategoris  $rkategoris
+     * @param \App\Rkategoris $rkategoris
      * @return \Illuminate\Http\Response
      */
     public function show(Rkategoris $rkategoris)
@@ -95,7 +104,7 @@ class RkategorisController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Rkategoris  $rkategoris
+     * @param \App\Rkategoris $rkategoris
      * @return \Illuminate\Http\Response
      */
     public function edit(Rkategoris $rkategoris)
@@ -106,8 +115,8 @@ class RkategorisController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Rkategoris  $rkategoris
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Rkategoris $rkategoris
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Rkategoris $rkategoris)
@@ -136,7 +145,7 @@ class RkategorisController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Rkategoris  $rkategoris
+     * @param \App\Rkategoris $rkategoris
      * @return \Illuminate\Http\Response
      */
     public function destroy(Request $request)
