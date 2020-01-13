@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Users;
-
+use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -62,8 +62,13 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        $kullanici = Users::where('id', $id)->first();
-        return view('backend.kullanicilar.duzenle')->with('kullanici', $kullanici);
+        $role =Auth::user()->role;
+        if ($role==1) {
+            $kullanici = Users::where('id', $id)->first();
+            return view('backend.kullanicilar.duzenle')->with('kullanici', $kullanici);
+        }else{
+            return redirect('admin')->with('error', 'Yanlış Alandasın');
+        }
     }
 
     /**
@@ -129,6 +134,7 @@ class UsersController extends Controller
         }
 
         if (!empty($request->users_foto)) {
+
             if ($kullanici) {
                 $path = 'images/users/' . $user->users_foto;
                 if (file_exists($path)) {
@@ -136,6 +142,7 @@ class UsersController extends Controller
                 }
 
                 //return back()->with("success", "Düzenleme İşlemi Başarılı Şekilde Gerçekleştirilmiştir.");
+
             }
         }
         if ($kullanici) {

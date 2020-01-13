@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Pozisyonlars;
 use DataTables;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Validator;
 
 class PozisyonlarsController extends Controller
@@ -18,17 +19,25 @@ class PozisyonlarsController extends Controller
      */
     public function index(Request $request)
     {
-
+        $kullanici_id = Auth::user()->id;
         if ($request->ajax()) {
-            $data = Pozisyonlars::latest()->get();
+            $data = Pozisyonlars::orderByRaw(\DB::raw("FIELD(ekleyen_id, $kullanici_id) DESC"))->latest()->get();
             return DataTables::of($data)
                 ->addColumn('action', function ($data) {
-                    $hastane = Hastanes::where('bolum', $data->id )->count();
-                    $button = '<button class="edit btn btn-primary btn-sm" data-pozisyon="' . $data->pozisyon . '" data-pozisyonid=' . $data->id . ' data-toggle="modal" data-target="#edit">Düzenle</button>';
-                    if ($hastane <= 0){
-                    $button .= '&nbsp;&nbsp;&nbsp; <button class="delete btn btn-danger btn-sm" data-pozisyonid=' . $data->id . ' data-toggle="modal" data-target="#delete">Sil</button>';
-                    }else{
-                        //$button .=   " ".$hastane ."Tane Personel Ekli Gözüküyor";
+                    $hastane = Hastanes::where('bolum', $data->id)->count();
+
+                    $kullanici_id = Auth::user()->id;
+                    $role = Auth::user()->role;
+                    if ($data->ekleyen_id == $kullanici_id || $role == 1) {
+                        $button = '<button class="edit btn btn-primary btn-sm" data-pozisyon="' . $data->pozisyon . '" data-pozisyonid=' . $data->id . ' data-toggle="modal" data-target="#edit">Düzenle</button>';
+                        if ($hastane <= 0) {
+                            $button .= '&nbsp;&nbsp;&nbsp; <button class="delete btn btn-danger btn-sm" data-pozisyonid=' . $data->id . ' data-toggle="modal" data-target="#delete">Sil</button>';
+                        } else {
+                            //$button .=   " ".$hastane ."Tane Personel Ekli Gözüküyor";
+                        }
+                    } else {
+                        $button = '<p class="text-red">Sadece Yetkilisi Müdahale Edebilir</p>';
+                        $button .= '';
                     }
                     return $button;
                 })
@@ -136,8 +145,6 @@ class PozisyonlarsController extends Controller
             return back()->with('success', 'İşlem Başarılı');
         }
         return back()->with('error', 'İşlem Başarısız');
-
-
 
 
     }

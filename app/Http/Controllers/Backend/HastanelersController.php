@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Hastanelers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Auth;
 
 class HastanelersController extends Controller
 {
@@ -34,6 +35,8 @@ class HastanelersController extends Controller
 
     public function duzenle($id)
     {
+        $role =Auth::user()->role;
+        if ($role==1){
         $hastanelers = Hastanelers::where('id', $id)->first();
 
         if ($hastanelers){
@@ -43,11 +46,14 @@ class HastanelersController extends Controller
             //return view('backend.hastaneler.index');
             return redirect('admin/hastaneler')->with('error', 'Yanlış Alandasın');
         }
-
+        }else{
+            return redirect('admin')->with('error', 'Yanlış Alandasın');
+        }
     }
 
     public function Update(Request $request, $id)
     {
+        
         $hastanelers = Hastanelers::Where('id', $id)->update(
             [
                 'hastane_adi' => $request->hastane_adi,

@@ -16,17 +16,17 @@
             <ol class="breadcrumb">
                 <li>
 
-                        <button class="btn btn-success btn-xs"  data-toggle="modal" data-target="#yeniekle">
-                            <i class="fa fa-plus" aria-hidden="true"></i>
-                            Yeni Ekle
-                        </button>
+                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#yeniekle">
+                        <i class="fa fa-plus" aria-hidden="true"></i>
+                        Yeni Ekle
+                    </button>
 
                 </li>
 
             </ol>
         </section>
 
-        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" />
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css"/>
         <!-- Main content -->
         <section class="content">
             <div class="row">
@@ -48,7 +48,6 @@
                             </div>
 
 
-
                         </div>
                         <!-- /.box-body -->
                     </div>
@@ -66,14 +65,16 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="myModalLabel">Yeni Kategori Ekleme</h4>
                 </div>
                 <form action="{{route('kategori.store')}}" method="post">
                     {{csrf_field()}}
                     <div class="modal-body">
                         <div class="form-group">
-                            <input type="text" class="form-control" name="rehkat_adi" id="rehkat_adi" required placeholder="Kategroi Adını Yazınız">
+                            <input type="text" class="form-control" name="rehkat_adi" id="rehkat_adi" required
+                                   placeholder="Kategroi Adını Yazınız">
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -91,7 +92,8 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="myModalLabel">Duzenleme Ekranı</h4>
                 </div>
                 <form action="{{route('kategori.update','rehkat_id')}}" method="post">
@@ -99,7 +101,7 @@
                     {{csrf_field()}}
                     <div class="modal-body">
                         <input type="hidden" name="rehkat_id" id="rehkat_id" value="">
-                        <input type="text" name="rehkat_adi" id="rehkat_adi" class="form-control"  value=""/>
+                        <input type="text" name="rehkat_adi" id="rehkat_adi" class="form-control" value=""/>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Kaydetme</button>
@@ -115,7 +117,8 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title text-center" id="myModalLabel">Silme Ekranı</h4>
                 </div>
                 <form action="{{route('kategori.destroy','rehkat_id')}}" method="post">
@@ -142,7 +145,7 @@
     <script src="/backend/bower_components/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap 3.3.7 -->
     <script>
-        $(document).ready(function(){
+        $(document).ready(function () {
 
             $('#user_table').DataTable({
                 processing: true,

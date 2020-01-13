@@ -152,6 +152,7 @@
             $('#user_table').DataTable({
                 processing: true,
                 serverSide: true,
+                "ordering": false,
                 ajax: {
                     url: "{{ route('pozisyonlar.index') }}",
                 },
