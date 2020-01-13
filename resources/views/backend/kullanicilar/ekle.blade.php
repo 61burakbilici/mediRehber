@@ -1,4 +1,4 @@
-@extends('backend.layout') @section('title') Kullanıcı Düzenleme Sayfası- MediRehber Admin Paneli | Burak BİLİCİ @endsection @section('content')
+@extends('backend.layout') @section('title') Kullanıcı Ekleme Sayfası- MediRehber Admin Paneli | Burak BİLİCİ @endsection @section('content')
     <div class="content-wrapper">
 
 
@@ -9,7 +9,7 @@
             <div class="col-md-12">
                 <div class="box">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Düzeneleme</h3>
+                        <h3 class="box-title">Yeni Kullanıcı Ekleme Alanı</h3>
 
                         <div class="box-tools pull-right">
                             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
@@ -25,9 +25,11 @@
 
 
                                 <div class="box-body">
-                                    <form action="" method="post"
+                                    <form action="{{route('kullanicilar.store')}}" method="post"
                                           enctype="multipart/form-data">
-                                        @csrf
+
+                                        {{method_field('post')}}
+                                        {{csrf_field()}}
                                         <div class="col-md-12">
 
                                             <div class="col-md-6">
@@ -36,8 +38,7 @@
                                                     <div class="row">
                                                         <div class="col-xs-12">
                                                             <input class="form-control" type="text"
-                                                                   name="users_name"
-                                                                   value="">
+                                                                   name="name">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -45,12 +46,11 @@
 
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label>Kullanıcı</label>
+                                                    <label>Mail Adresi</label>
                                                     <div class="row">
                                                         <div class="col-xs-12">
-                                                            <input class="form-control" type="text"
-                                                                   name="users_username"
-                                                                   value="">
+                                                            <input class="form-control" type="email"
+                                                                   name="email">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -65,8 +65,7 @@
                                                     <div class="row">
                                                         <div class="col-xs-12">
                                                             <input class="form-control" type="text"
-                                                                   name="users_tel"
-                                                                   value="">
+                                                                   name="users_tel">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -80,11 +79,13 @@
                                                             <select class="form-control" id="hastane_id"
                                                                     name="hastane_id">
                                                                 @php($hastaneler = DB::table('hastanelers')->get())
-
-                                                                    @foreach ($hastaneler as $hastaneler)
-                                                                        <option value="{{$hastaneler->id}}">{{$hastaneler->hastane_adi}}</option>
-                                                                    @endforeach
-
+                                                                <option selected readonly="">Lütfen Kullanıcının
+                                                                    Hasatnesini Seçiniz
+                                                                </option>
+                                                                @foreach ($hastaneler as $hastaneler)
+                                                                    <option
+                                                                        value="{{$hastaneler->id}}">{{$hastaneler->hastane_adi}}</option>
+                                                                @endforeach
                                                             </select>
 
                                                         </div>
@@ -93,16 +94,20 @@
                                             </div>
 
                                         </div>
+
                                         <div class="col-md-12">
 
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label>Mail Adresi</label>
+                                                    <label>Kullanıcı Gurubu</label>
                                                     <div class="row">
                                                         <div class="col-xs-12">
-                                                            <input class="form-control" type="email"
-                                                                   name="users_email"
-                                                                   value="">
+                                                            <select class="form-control" id="role"
+                                                                    name="role">
+                                                                <option value="0"> Normal Kullanıcı</option>
+                                                                <option value="1"> Admin</option>
+                                                            </select>
+
                                                         </div>
                                                     </div>
                                                 </div>
@@ -114,59 +119,54 @@
                                                     <div class="row">
                                                         <div class="col-xs-12">
                                                             <input class="form-control" type="password"
-                                                                   name="users_password"
-                                                                   value="">
+                                                                   name="users_password">
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+
                                         <div class="col-md-12">
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Kullanıcı Resmi</label>
                                                     <div class="row">
                                                         <div class="col-xs-12">
-
+                                                            <input class="form-control" type="file"
+                                                                   name="users_foto">
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Resim Var İse</label>
-                                                    <div class="row">
-                                                        <div class="col-xs-12">
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <input type="hidden" value="user_res">
-                                            <div class="box-footer">
-                                                <button style="width: 100%;" type="submit" class="btn btn-primary">
-                                                    Kaydet
-                                                </button>
-                                            </div>
 
                                         </div>
-                                    </form>
+
+                                        <input type="hidden" value="user_res">
+                                        <div class="box-footer">
+                                            <button style="width: 100%;" type="submit" class="btn btn-primary">
+                                                Kaydet
+                                            </button>
+                                        </div>
+
                                 </div>
+                                </form>
+
+
                             </div>
-
                         </div>
-                        <!-- /.row -->
+
                     </div>
-
+                    <!-- /.row -->
                 </div>
-                <!-- /.box -->
-            </div>
-            <!-- /.col -->
 
-        </section>
-        <!-- /.content -->
+            </div>
+            <!-- /.box -->
+    </div>
+    <!-- /.col -->
+
+    </section>
+    <!-- /.content -->
     </div>
 @endsection
 
@@ -174,4 +174,5 @@
 @endsection
 
 @section('js')
+
 @endsection

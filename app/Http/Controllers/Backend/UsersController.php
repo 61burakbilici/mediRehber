@@ -29,7 +29,14 @@ class UsersController extends Controller
      */
     public function create()
     {
-        //
+        $role =Auth::user()->role;
+        if ($role==1) {
+            return view('backend.kullanicilar.ekle');
+        }else{
+            return redirect('admin/')->with('error', 'Yanlış Alandasın');
+        }
+
+
     }
 
     /**
@@ -40,7 +47,79 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request->all());
+
+        $user = DB::table('users')->where('id', $request->kullanici_id)->first();
+
+        if ($request->users_foto == null || empty($request->users_foto) || $request->users_foto == "" || $request->users_foto == " ") {
+            if (empty($user->users_foto)) {
+                $file_name = null;
+            }else{
+                $file_name = $user->users_foto;
+            }
+
+
+        } else {
+            if ($request->hasFile('users_foto')) {
+                $request->validate([
+                    'users_foto' => 'required|image|mimes:jpg,jpeg,png|max:2048'
+                ]);
+
+                $file_name = uniqid() . '.' . $request->users_foto->getClientOriginalExtension();
+                $request->users_foto->move(public_path('images/users'), $file_name);
+                $request->users_foto = $file_name;
+            }
+
+        }
+
+
+        if (empty($request->users_password)) {
+
+            $kullanici = Users::Where('id', $request->kullanici_id)->update(
+                [
+                    'users_foto' => $file_name,
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'users_tel' => $request->users_tel,
+                    'hastane_id' => $request->hastane_id,
+                    'role' => $request->role
+                ]
+
+            );
+        } else {
+
+            $kullanici = Users::Where('id', $request->kullanici_id)->update(
+                [
+                    'users_foto' => $file_name,
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'users_tel' => $request->users_tel,
+                    'hastane_id' => $request->hastane_id,
+                    'role' => $request->role,
+                    'password' => bcrypt($request->users_password)
+                ]
+
+            );
+        }
+
+        if (!empty($request->users_foto)) {
+
+            if ($kullanici) {
+                $path = 'images/users/' . $user->users_foto;
+                if (file_exists($path)) {
+                    @unlink(public_path($path));
+                }
+
+                //return back()->with("success", "Düzenleme İşlemi Başarılı Şekilde Gerçekleştirilmiştir.");
+
+            }
+        }
+        if ($kullanici) {
+
+            return back()->with("success", "Düzenleme İşlemi Başarılı Şekilde Gerçekleştirilmiştir.");
+        } else {
+            return back()->with("error", "Düzenleme İşlemi Başarısız");
+        }
     }
 
     /**
