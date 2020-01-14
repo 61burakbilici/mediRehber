@@ -55,7 +55,7 @@
                                                     $hastane = DB::table('hastanelers')
                                                     ->where('id', $item->hastane_id)->first();
                                                 @endphp
-                                                <tr {{$item->role == 1 ? "style=background-color:#bfdc78": ""}}>
+                                                <tr id="has-@php echo $item->id @endphp" {{$item->role == 1 ? "style=background-color:#bfdc78": ""}}>
                                                     <td>{{$loop->iteration}}</td>
                                                     <td>
                                                         @if(empty($item->users_foto))
@@ -80,8 +80,13 @@
                                                     <td style="width: 5px;"><a
                                                             href="{{{ route('kullanicilar.edit', $item->id) }}}"><i
                                                                 class="fa fa-pencil-square"></i></a></td>
-                                                    <td style="width: 5px;"><a href="javascript:void(0)"><i
-                                                                id="" class="fa fa-trash-o"></i></a></td>
+                                                    @if(Auth::user()->id ==$item->id)
+                                                        <td></td>
+                                                    @else
+                                                        <td style="width: 5px;"><a href="javascript:void(0)"><i
+                                                                    id="{{$item->id}}" class="fa fa-trash-o"></i></a>
+                                                        </td>
+                                                    @endif
                                                 </tr>
                                             @endforeach
                                             </tbody>
@@ -118,22 +123,7 @@
         </section>
         <!-- /.content -->
     </div>
-    <script type="text/javascript">
-        $(".fa-trash-o").click(function () {
-            destroy_id = $(this).attr('id');
 
-            alertify.confirm('Silme işlemini onaylayın!', 'Bu işlem geri alınamaz',
-                function () {
-                    location.href = "kullanicilar/sil/" + destroy_id;
-                },
-                function () {
-                    alertify.error('Silme işlemi iptal edildi')
-                }
-            )
-
-        });
-
-    </script>
 @endsection
 
 @section('css')
@@ -143,7 +133,44 @@
 @endsection
 
 @section('js')
-    <!-- jQuery 3 -->
+
     <script src="/backend/bower_components/jquery/dist/jquery.min.js"></script>
-    <!-- Bootstrap 3.3.7 -->
+    <!--suppress VueDuplicateTag -->
+    <script type="text/javascript">
+
+
+        $(".fa-trash-o").click(function () {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            destroy_id = $(this).attr('id');
+
+            alertify.confirm('Silme işlemini onaylayın!', 'Bu işlem geri alınamaz',
+                function () {
+
+                    $.ajax({
+                        type: "DELETE",
+                        url: "{{route('kullanicilar.destroy',$item->id)}}",
+                        success: function (msg) {
+                            if (msg) {
+                                $("#has-" + destroy_id).remove();
+                                alertify.success("Silme İşlemi Başarılı");
+
+                            } else {
+                                alertify.error("İşlem Tamamlanamadı");
+                            }
+                        }
+                    });
+
+                },
+                function () {
+                    alertify.error('Silme işlemi iptal edildi')
+                }
+            )
+
+        });
+
+    </script>
 @endsection

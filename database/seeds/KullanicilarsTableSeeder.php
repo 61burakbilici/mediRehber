@@ -23,7 +23,7 @@ class KullanicilarsTableSeeder extends Seeder
                     'hastane_id' => $faker->randomDigit,
                     'email_verified_at' => now(),
                     'role' => 1,
-                    'password' => bcrypt('123456789'),
+                    'password' => bcrypt('1'),
                     'created_at' => now(),
                     'updated_at' => now()
                 ]

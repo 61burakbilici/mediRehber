@@ -7,6 +7,7 @@ use App\Users;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Validator;
 
 
 class UsersController extends Controller
@@ -29,10 +30,10 @@ class UsersController extends Controller
      */
     public function create()
     {
-        $role =Auth::user()->role;
-        if ($role==1) {
+        $role = Auth::user()->role;
+        if ($role == 1) {
             return view('backend.kullanicilar.ekle');
-        }else{
+        } else {
             return redirect('admin/')->with('error', 'Yanlış Alandasın');
         }
 
@@ -47,18 +48,23 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        //dd($request->all());
+        $rules = array(
+            'name' => 'required',
+            'email' => 'required|unique:Users|email',
+            'users_password' => 'required',
+            'users_tel' => 'numeric|nullable'
+        );
 
-        $user = DB::table('users')->where('id', $request->kullanici_id)->first();
+       $error = Validator::make($request->all(), $rules);
+
+        if ($error->fails()) {
+            return redirect()->back()->withErrors(['errors' => $error->errors()->all()]);
+        }
+
 
         if ($request->users_foto == null || empty($request->users_foto) || $request->users_foto == "" || $request->users_foto == " ") {
-            if (empty($user->users_foto)) {
-                $file_name = null;
-            }else{
-                $file_name = $user->users_foto;
-            }
-
-
+            $file_name = null;
         } else {
             if ($request->hasFile('users_foto')) {
                 $request->validate([
@@ -71,54 +77,25 @@ class UsersController extends Controller
             }
 
         }
+        $kullanici = Users::insert(
+            [
+                'users_foto' => $file_name,
+                'name' => $request->name,
+                'email' => $request->email,
+                'users_tel' => $request->users_tel,
+                'hastane_id' => $request->hastane_id,
+                'role' => $request->role,
+                'password' => bcrypt($request->users_password)
+            ]
+
+        );
 
 
-        if (empty($request->users_password)) {
-
-            $kullanici = Users::Where('id', $request->kullanici_id)->update(
-                [
-                    'users_foto' => $file_name,
-                    'name' => $request->name,
-                    'email' => $request->email,
-                    'users_tel' => $request->users_tel,
-                    'hastane_id' => $request->hastane_id,
-                    'role' => $request->role
-                ]
-
-            );
-        } else {
-
-            $kullanici = Users::Where('id', $request->kullanici_id)->update(
-                [
-                    'users_foto' => $file_name,
-                    'name' => $request->name,
-                    'email' => $request->email,
-                    'users_tel' => $request->users_tel,
-                    'hastane_id' => $request->hastane_id,
-                    'role' => $request->role,
-                    'password' => bcrypt($request->users_password)
-                ]
-
-            );
-        }
-
-        if (!empty($request->users_foto)) {
-
-            if ($kullanici) {
-                $path = 'images/users/' . $user->users_foto;
-                if (file_exists($path)) {
-                    @unlink(public_path($path));
-                }
-
-                //return back()->with("success", "Düzenleme İşlemi Başarılı Şekilde Gerçekleştirilmiştir.");
-
-            }
-        }
         if ($kullanici) {
 
-            return back()->with("success", "Düzenleme İşlemi Başarılı Şekilde Gerçekleştirilmiştir.");
+            return back()->with("success", "Kayıt İşlemi Başarılı Şekilde Gerçekleştirilmiştir.");
         } else {
-            return back()->with("error", "Düzenleme İşlemi Başarısız");
+            return back()->with("error", "Kayıt İşlemi Başarısız");
         }
     }
 
@@ -141,11 +118,11 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        $role =Auth::user()->role;
-        if ($role==1) {
+        $role = Auth::user()->role;
+        if ($role == 1) {
             $kullanici = Users::where('id', $id)->first();
             return view('backend.kullanicilar.duzenle')->with('kullanici', $kullanici);
-        }else{
+        } else {
             return redirect('admin')->with('error', 'Yanlış Alandasın');
         }
     }
@@ -164,7 +141,7 @@ class UsersController extends Controller
         if ($request->users_foto == null || empty($request->users_foto) || $request->users_foto == "" || $request->users_foto == " ") {
             if (empty($user->users_foto)) {
                 $file_name = null;
-            }else{
+            } else {
                 $file_name = $user->users_foto;
             }
 
@@ -242,6 +219,14 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user_id = Auth::user()->id;
+        if ($user_id==$id){
+
+        }
+        $has = Users::find(intval($id));
+        if ($has->delete()) {
+            echo 1;
+        }
+        echo 0;
     }
 }

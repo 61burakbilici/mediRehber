@@ -23,7 +23,6 @@
                         <div class="row">
                             <div class="col-md-12">
 
-
                                 <div class="box-body">
                                     <form action="{{route('kullanicilar.store')}}" method="post"
                                           enctype="multipart/form-data">
@@ -64,7 +63,7 @@
                                                     <label>Telefon Numarası</label>
                                                     <div class="row">
                                                         <div class="col-xs-12">
-                                                            <input class="form-control" type="text"
+                                                            <input class="form-control" type="tel"
                                                                    name="users_tel">
                                                         </div>
                                                     </div>

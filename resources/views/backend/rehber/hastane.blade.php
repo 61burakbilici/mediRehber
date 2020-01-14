@@ -100,6 +100,7 @@
     <!-- jQuery 3 -->
     <script src="/backend/bower_components/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap 3.3.7 -->
+    <!--suppress VueDuplicateTag -->
     <script type="text/javascript">
 
 
