@@ -119,7 +119,8 @@ class UsersController extends Controller
     public function edit($id)
     {
         $role = Auth::user()->role;
-        if ($role == 1) {
+        $udi = Auth::user()->id;
+        if ($role == 1 || $udi== $id) {
             $kullanici = Users::where('id', $id)->first();
             return view('backend.kullanicilar.duzenle')->with('kullanici', $kullanici);
         } else {
@@ -221,12 +222,13 @@ class UsersController extends Controller
     {
         $user_id = Auth::user()->id;
         if ($user_id==$id){
-
-        }
+            echo 0;
+        }else{
         $has = Users::find(intval($id));
         if ($has->delete()) {
             echo 1;
         }
         echo 0;
+        }
     }
 }

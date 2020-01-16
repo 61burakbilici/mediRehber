@@ -35,7 +35,10 @@
                             <div class="col-md-12">
 
                                 <div class="box-body">
-                                    @if(Auth::user()->role ==1)
+                                    @foreach ($data['user'] as $item)
+                                    @endforeach
+                                    @if(Auth::user()->role ==1 || Auth::user()->id ==$item->id  )
+
                                         <table id="example1" class="table table-bordered table-striped">
                                             <thead>
                                             <tr>

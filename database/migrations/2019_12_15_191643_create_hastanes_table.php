@@ -22,8 +22,9 @@ class CreateHastanesTable extends Migration
             $table->text('email')->nullable();
             $table->text('bolum')->nullable();
             $table->text('rehkat')->nullable();
-            $table->text('not')->nullable();
             $table->string('ekleyen_id')->nullable();
+            $table->integer('hastane_id')->nullable();
+            $table->text('not')->nullable();
             $table->timestamps();
         });
     }

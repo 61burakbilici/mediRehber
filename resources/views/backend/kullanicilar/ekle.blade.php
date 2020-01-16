@@ -78,7 +78,7 @@
                                                             <select class="form-control" id="hastane_id"
                                                                     name="hastane_id">
                                                                 @php($hastaneler = DB::table('hastanelers')->get())
-                                                                <option selected readonly="">Lütfen Kullanıcının
+                                                                <option selected readonly="" value="">Lütfen Kullanıcının
                                                                     Hasatnesini Seçiniz
                                                                 </option>
                                                                 @foreach ($hastaneler as $hastaneler)

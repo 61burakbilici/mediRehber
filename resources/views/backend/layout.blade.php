@@ -212,12 +212,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                                     @endphp
                                     {{Auth::user()->name}}
-                                    -@if(!empty($hastane_id)) {!! Str::limit($hastane->hastane_adi, 10, ' ...') !!}@endif
+                                    <br> @if(!empty($hastane_id)) {!! Str::limit($hastane->hastane_adi, 20, ' ...') !!}@endif
                                 </p>
                             </li>
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="#" class="btn btn-default btn-flat">Profil</a>
+                                    <a href="{{{ route('kullanicilar.edit', Auth::user()->id) }}}" class="btn btn-default btn-flat">Profil</a>
                                 </div>
                                 <div class="pull-right">
                                     <a class="btn btn-default btn-flat" href="{{ route('admin.logout') }}">Çıkış Yap</a>
@@ -245,7 +245,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     @if(empty(Auth::user()->users_foto))
                         <img src="/backend/dist/img/user2-160x160.jpg" class="img-circle" alt="{{Auth::user()->name}}">
                     @else
-                        <img src="/images/users/{{Auth::user()->users_foto}}" class="img-circle"
+                        <img src="/images/users/{{Auth::user()->users_foto}}" class="img-circle" style="height: 50px;"
                              alt="{{Auth::user()->name}}">
 
                     @endif
