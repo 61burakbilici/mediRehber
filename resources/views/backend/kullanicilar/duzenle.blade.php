@@ -317,15 +317,15 @@
                                                         </div>
 
                                                         <ul class="list-group">
-
+                                                            @foreach ($flights as $flight)
+                                                                {{$flight->name;}}
                                                             @php($yetkilers = DB::table('yetkilers')->where('users_id',$kullanici->id)->get())
+                                                            @foreach($yetkilers as $yetkilers_item)
 
-                                                            @foreach($yetkilers as $yetkilers)
-
-                                                                @php($yetki = DB::table('yetkis')->where('id',$yetkilers->id)->get())
-                                                                @foreach($yetki as $yetki)
+                                                                @php($yetki = DB::table('yetkis')->where('id',$yetkilers_item->id)->get())
+                                                                @foreach($yetki as $yetki_item)
                                                                     <li class="list-group-item"
-                                                                        value="{{$yetki->id}}">{{$yetki->yetki_adi}}</li>
+                                                                        value="{{$yetki_item->id}}">{{$yetki_item->yetki_adi}}</li>
                                                                 @endforeach
 
                                                             @endforeach
