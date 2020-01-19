@@ -317,17 +317,10 @@
                                                         </div>
 
                                                         <ul class="list-group">
-                                                            @foreach ($flights as $flight)
-                                                                {{$flight->name;}}
-                                                            @php($yetkilers = DB::table('yetkilers')->where('users_id',$kullanici->id)->get())
-                                                            @foreach($yetkilers as $yetkilers_item)
+                                                            @php($yetkiler = \App\User::find($kullanici->id)->roles)
 
-                                                                @php($yetki = DB::table('yetkis')->where('id',$yetkilers_item->id)->get())
-                                                                @foreach($yetki as $yetki_item)
-                                                                    <li class="list-group-item"
-                                                                        value="{{$yetki_item->id}}">{{$yetki_item->yetki_adi}}</li>
-                                                                @endforeach
-
+                                                            @foreach($yetkiler as $yetkisi)
+                                                            <li class="list-group-item active" >{{$yetkisi->yetki_adi}}</li>
                                                             @endforeach
 
                                                         </ul>
@@ -425,5 +418,6 @@
 @endsection
 
 @section('js')
+
 
 @endsection
