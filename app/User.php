@@ -37,6 +37,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    /**
+     * Kullanıcının Yetkilerini Çekiyoruz
+     */
     public function roles()
     {
         return $this->belongsToMany('App\Yetkis','yetkilers','users_id','yetki_id');

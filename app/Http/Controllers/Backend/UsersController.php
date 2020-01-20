@@ -120,9 +120,10 @@ class UsersController extends Controller
     {
         $role = Auth::user()->role;
         $udi = Auth::user()->id;
+        $yetkiler = \App\User::find($id)->roles;
         if ($role == 1 || $udi== $id) {
             $kullanici = Users::where('id', $id)->first();
-            return view('backend.kullanicilar.duzenle')->with('kullanici', $kullanici);
+            return view('backend.kullanicilar.duzenle')->with(['kullanici'=>$kullanici,'yetkiler'=>$yetkiler]);
         } else {
             return redirect('admin')->with('error', 'Yanlış Alandasın');
         }

@@ -194,29 +194,6 @@
                                 </form>
 
 
-                                <script
-                                    src="/backend/js/jquery-3.1.1.slim.min.js"
-                                    integrity="sha256-/SIrNqv8h6QGKDuNoLGA4iret+kyesCkHGzVUUV0shc="
-                                    crossorigin="anonymous"></script>
-                                <script>
-                                    $(function () {
-                                        $(document).on('click', '.btn-add', function (e) {
-                                            e.preventDefault();
-                                            var controlForm = $('#myRepeatingFields:first'),
-                                                currentEntry = $(this).parents('.entry:first'),
-                                                newEntry = $(currentEntry.clone()).appendTo(controlForm);
-                                            newEntry.find('input').val('');
-                                            controlForm.find('.entry:not(:last) .btn-add')
-                                                .removeClass('btn-add').addClass('btn-remove')
-                                                .removeClass('btn-success').addClass('btn-danger')
-                                                .html('<span class="glyphicon glyphicon-minus"></span>');
-                                        }).on('click', '.btn-remove', function (e) {
-                                            e.preventDefault();
-                                            $(this).parents('.entry:first').remove();
-                                            return false;
-                                        });
-                                    });
-                                </script>
                             </div>
                         </div>
 
@@ -246,89 +223,44 @@
 
 
                                     <div class="box-body">
-                                        <script
-                                            src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-                                        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-                                        <!------ Include the above in your HEAD tag ---------->
+
 
                                         <div class="container">
                                             <br/>
-                                            <div class="row">
 
-                                                <div class="dual-list list-left col-md-5">
-                                                    <div class="well text-right">
-                                                        <div class="row">
-                                                            <div class="col-md-10">
-                                                                <div class="input-group">
-                                                                    <span
-                                                                        class="input-group-addon glyphicon glyphicon-search"></span>
-                                                                    <input type="text" name="SearchDualList"
-                                                                           class="form-control" placeholder="search"/>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-2">
-                                                                <div class="btn-group">
-                                                                    <a class="btn btn-default selector"
-                                                                       title="select all"><i
-                                                                            class="glyphicon glyphicon-unchecked"></i></a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
 
-                                                        <ul class="list-group">
+                                            <div class="container">
+                                                <div class="row text-center">
+                                                    <br>
+                                                    @foreach($yetkiler as $yetkilerim)
+                                                        <label for="default" class="btn btn-default">Default <input
+                                                                type="checkbox" id="default" class="badgebox"><span
+                                                                class="badge">&check;</span></label>
+                                                    @endforeach
 
-                                                            @php($yetkis = DB::table('yetkis')->get())
-                                                            @foreach($yetkis as $yetkis)
-                                                                <li class="list-group-item"
-                                                                    value="{{$yetkis->id}}">{{$yetkis->yetki_adi}}</li>
-                                                            @endforeach
-                                                        </ul>
-                                                    </div>
+
+                                                    <label for="default" class="btn btn-default">Default <input
+                                                            type="checkbox" id="default" class="badgebox"><span
+                                                            class="badge">&check;</span></label>
+                                                    <label for="primary" class="btn btn-primary">Primary <input
+                                                            type="checkbox" id="primary" class="badgebox"><span
+                                                            class="badge">&check;</span></label>
+                                                    <label for="info" class="btn btn-info">Info <input type="checkbox"
+                                                                                                       id="info"
+                                                                                                       class="badgebox"><span
+                                                            class="badge">&check;</span></label>
+                                                    <label for="success" class="btn btn-success">Success <input
+                                                            type="checkbox" id="success" class="badgebox"><span
+                                                            class="badge">&check;</span></label>
+                                                    <label for="warning" class="btn btn-warning">Warning <input
+                                                            type="checkbox" id="warning" class="badgebox"><span
+                                                            class="badge">&check;</span></label>
+                                                    <label for="danger" class="btn btn-danger">Danger <input
+                                                            type="checkbox" id="danger" class="badgebox"><span
+                                                            class="badge">&check;</span></label>
                                                 </div>
-
-                                                <div class="list-arrows col-md-1 text-center">
-                                                    <button class="btn btn-default btn-sm move-left">
-                                                        <span class="glyphicon glyphicon-chevron-left"></span>
-                                                    </button>
-
-                                                    <button class="btn btn-default btn-sm move-right">
-                                                        <span class="glyphicon glyphicon-chevron-right"></span>
-                                                    </button>
-                                                </div>
-
-                                                <div class="dual-list list-right col-md-5">
-                                                    <div class="well">
-                                                        <div class="row">
-                                                            <div class="col-md-2">
-                                                                <div class="btn-group">
-                                                                    <a class="btn btn-default selector"
-                                                                       title="select all"><i
-                                                                            class="glyphicon glyphicon-unchecked"></i></a>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-10">
-                                                                <div class="input-group">
-                                                                    <input type="text" name="SearchDualList"
-                                                                           class="form-control" placeholder="search"/>
-                                                                    <span
-                                                                        class="input-group-addon glyphicon glyphicon-search"></span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <ul class="list-group">
-                                                            @php($yetkiler = \App\User::find($kullanici->id)->roles)
-
-                                                            @foreach($yetkiler as $yetkisi)
-                                                            <li class="list-group-item active" >{{$yetkisi->yetki_adi}}</li>
-                                                            @endforeach
-
-                                                        </ul>
-
-                                                    </div>
-                                                </div>
-
                                             </div>
+
 
                                         </div>
                                         <div class="box-footer">
@@ -336,65 +268,7 @@
                                                 Kaydet
                                             </button>
                                         </div>
-                                        <script !src="">
-                                            $(function () {
 
-                                                $('body').on('click', '.list-group .list-group-item', function () {
-                                                    $(this).toggleClass('active');
-                                                });
-                                                $('.list-arrows button').click(function () {
-                                                    var $button = $(this), actives = '';
-                                                    if ($button.hasClass('move-left')) {
-                                                        actives = $('.list-right ul li.active');
-                                                        actives.clone().appendTo('.list-left ul');
-                                                        actives.remove();
-                                                    } else if ($button.hasClass('move-right')) {
-                                                        actives = $('.list-left ul li.active');
-                                                        actives.clone().appendTo('.list-right ul');
-                                                        actives.remove();
-                                                    }
-                                                });
-                                                $('.dual-list .selector').click(function () {
-                                                    var $checkBox = $(this);
-                                                    if (!$checkBox.hasClass('selected')) {
-                                                        $checkBox.addClass('selected').closest('.well').find('ul li:not(.active)').addClass('active');
-                                                        $checkBox.children('i').removeClass('glyphicon-unchecked').addClass('glyphicon-check');
-                                                    } else {
-                                                        $checkBox.removeClass('selected').closest('.well').find('ul li.active').removeClass('active');
-                                                        $checkBox.children('i').removeClass('glyphicon-check').addClass('glyphicon-unchecked');
-                                                    }
-                                                });
-                                                $('[name="SearchDualList"]').keyup(function (e) {
-                                                    var code = e.keyCode || e.which;
-                                                    if (code == '9') return;
-                                                    if (code == '27') $(this).val(null);
-                                                    var $rows = $(this).closest('.dual-list').find('.list-group li');
-                                                    var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
-                                                    $rows.show().filter(function () {
-                                                        var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
-                                                        return !~text.indexOf(val);
-                                                    }).hide();
-                                                });
-
-                                            });
-                                        </script>
-                                        <style>
-                                            .dual-list .list-group {
-                                                margin-top: 8px;
-                                            }
-
-                                            .list-left li, .list-right li {
-                                                cursor: pointer;
-                                            }
-
-                                            .list-arrows {
-                                                padding-top: 100px;
-                                            }
-
-                                            .list-arrows button {
-                                                margin-bottom: 20px;
-                                            }
-                                        </style>
 
                                     </div>
                                 </div>
@@ -415,6 +289,7 @@
 @endsection
 
 @section('css')
+
 @endsection
 
 @section('js')
