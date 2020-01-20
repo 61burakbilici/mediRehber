@@ -121,9 +121,10 @@ class UsersController extends Controller
         $role = Auth::user()->role;
         $udi = Auth::user()->id;
         $yetkiler = \App\User::find($id)->roles;
+        $TumYetkiler = \App\Yetkis::all();
         if ($role == 1 || $udi== $id) {
             $kullanici = Users::where('id', $id)->first();
-            return view('backend.kullanicilar.duzenle')->with(['kullanici'=>$kullanici,'yetkiler'=>$yetkiler]);
+            return view('backend.kullanicilar.duzenle')->with(['kullanici'=>$kullanici,'yetkiler'=>$yetkiler,'TumYetkiler'=>$TumYetkiler]);
         } else {
             return redirect('admin')->with('error', 'Yanlış Alandasın');
         }
@@ -138,6 +139,7 @@ class UsersController extends Controller
      */
     public function update(Request $request)
     {
+        dd($request->all());
         $user = DB::table('users')->where('id', $request->kullanici_id)->first();
 
         if ($request->users_foto == null || empty($request->users_foto) || $request->users_foto == "" || $request->users_foto == " ") {

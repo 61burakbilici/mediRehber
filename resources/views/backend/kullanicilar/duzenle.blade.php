@@ -225,48 +225,38 @@
                                     <div class="box-body">
 
 
-                                        <div class="container">
-                                            <br/>
-
 
                                             <div class="container">
                                                 <div class="row text-center">
-                                                    <br>
-                                                    @foreach($yetkiler as $yetkilerim)
-                                                        <label for="default" class="btn btn-default">Default <input
-                                                                type="checkbox" id="default" class="badgebox"><span
-                                                                class="badge">&check;</span></label>
+                                                    <form action="{{route('kullanicilar.update',$kullanici->id)}}" method="post"
+                                                          enctype="multipart/form-data">
+                                                        {{method_field('patch')}}
+                                                        {{csrf_field()}}
+                                                        @foreach($TumYetkiler as $TumYetkileri)
+
+                                                        <label for="danger-{{$TumYetkileri->id}}" class="btn btn-danger">{{$TumYetkileri->yetki_adi}}
+                                                            <input type="checkbox" id="danger-{{$TumYetkileri->id}}" name="yetki[]" class="badgebox"
+                                                            @foreach($yetkiler as $yetkilerim)
+                                                                {{$TumYetkileri->id ==$yetkilerim->id ? 'checked': ''}}
+                                                                @endforeach
+
+                                                            >
+                                                            <span class="badge">&check;</span>
+                                                        </label>
+
                                                     @endforeach
 
-
-                                                    <label for="default" class="btn btn-default">Default <input
-                                                            type="checkbox" id="default" class="badgebox"><span
-                                                            class="badge">&check;</span></label>
-                                                    <label for="primary" class="btn btn-primary">Primary <input
-                                                            type="checkbox" id="primary" class="badgebox"><span
-                                                            class="badge">&check;</span></label>
-                                                    <label for="info" class="btn btn-info">Info <input type="checkbox"
-                                                                                                       id="info"
-                                                                                                       class="badgebox"><span
-                                                            class="badge">&check;</span></label>
-                                                    <label for="success" class="btn btn-success">Success <input
-                                                            type="checkbox" id="success" class="badgebox"><span
-                                                            class="badge">&check;</span></label>
-                                                    <label for="warning" class="btn btn-warning">Warning <input
-                                                            type="checkbox" id="warning" class="badgebox"><span
-                                                            class="badge">&check;</span></label>
-                                                    <label for="danger" class="btn btn-danger">Danger <input
-                                                            type="checkbox" id="danger" class="badgebox"><span
-                                                            class="badge">&check;</span></label>
                                                 </div>
                                             </div>
 
 
-                                        </div>
+
+
                                         <div class="box-footer">
                                             <button style="width: 100%;" type="submit" class="btn btn-primary">
                                                 Kaydet
                                             </button>
+                                            </form>
                                         </div>
 
 
